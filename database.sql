@@ -106,5 +106,3 @@ CREATE TABLE user_plan_object(
 	Plan_ID INT NOT NULL PRIMARY KEY,
     Object VARCHAR(45) NULL DEFAULT NULL
 );
-
-SELECT * FROM user;
