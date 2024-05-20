@@ -82,5 +82,9 @@ def diet_record():
 def workout_record():
     return render_template('workout_record.html')
 
+@app.route('/test')
+def test():
+    return render_template('plan01.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
