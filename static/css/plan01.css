@@ -1,0 +1,68 @@
+body{
+    background-size: cover;
+}
+.frame{
+    display: flex; /*讓下一層次水平排列*/
+}
+
+.headline1{
+    text-align: left;
+    color: rgb(130, 139, 139,0.678);
+    padding-left: 5%;
+}
+.headline2{
+    text-align: left;
+    color: rgba(130, 139, 139);
+    padding-left: 10%;
+}
+
+
+.choice{
+    margin-left: 23%;
+    font-size: 100px;
+    font-family:cursive;
+    text-shadow:rgba(238, 22, 22, 0.658) 5px 5px;;
+}
+
+/* .btn{
+    margin-left: 92%;
+    text-align: center;
+    cursor: pointer;
+    font-size: 25px;
+} */
+
+.tooltip-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    margin-left: 92%;
+}
+
+.tooltip-button img {
+    width: 80px; /* 调整大小 */
+    height: 70px;
+    margin-bottom: 3%;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* 将提示文字放置在按钮上方 */
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip-button:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}

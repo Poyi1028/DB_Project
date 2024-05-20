@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健康摄入</title>
+    <link rel="stylesheet" href="plan02-food.css">
+</head>
+<body>
+    <div class="header">
+        今天夠了嗎？
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="circle water">
+                <div class="content">
+                    <div class="name">水</div>
+                    <div class="amount">1.4 / 2.0 L</div>
+                </div>
+                <button class="plus-button">+</button>
+            </div>
+            <div class="circle protein">
+                <div class="content">
+                    <div class="name">蛋白質</div>
+                    <div class="amount">50.0 / 100.0 g</div>
+                </div>
+                <button class="plus-button">+</button>
+            </div>
+            <div class="circle calories">
+                <div class="content">
+                    <div class="name">熱量</div>
+                    <div class="amount">200.0 / 2500.0 cal</div>
+                </div>
+                <button class="plus-button">+</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="circle vitA">
+                <div class="content">
+                    <div class="name">維生素A</div>
+                    <div class="amount">0.70 / 1.00 mg</div>
+                </div>
+                <button class="plus-button">+</button>
+            </div>
+            <div class="circle vitD">
+                <div class="content">
+                    <div class="name">維生素D</div>
+                    <div class="amount">0.01 / 0.02 mg</div>
+                </div>
+                <button class="plus-button">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup">
+        <select id="substance">
+            <option value="water">水</option>
+            <option value="protein">蛋白質</option>
+            <option value="calories">熱量</option>
+            <option value="vitA">維生素A</option>
+            <option value="vitD">維生素D</option>
+        </select>
+        <textarea id="amount" placeholder="输入摄取量"></textarea>
+        <button id="add-button">新增</button>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const plusButtons = document.querySelectorAll('.plus-button');
+            const popup = document.querySelector('.popup');
+            const substanceSelect = document.getElementById('substance');
+            const amountInput = document.getElementById('amount');
+
+            plusButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    popup.classList.add('active');
+                    const substance = button.parentNode.classList[1]; // 获取圆圈的类名（物质名称）
+                    substanceSelect.value = substance; // 将物质名称设为下拉框的值
+                });
+            });
+
+            document.getElementById('add-button').addEventListener('click', () => {
+                const substance = substanceSelect.value;
+                const amount = parseFloat(amountInput.value);
+                const circle = document.querySelector(`.circle.${substance}`);
+                const amountText = circle.querySelector('.amount').innerText;
+                const [currentAmount, totalAmountWithUnit] = amountText.split(' / ');
+                const totalAmount = parseFloat(totalAmountWithUnit.replace(/[^\d.]/g, ''));
+                const unit = totalAmountWithUnit.replace(/[0-9.]/g, '').trim(); // 获取单位
+                const newAmount = parseFloat(currentAmount) + amount;
+                
+                if (substance === 'vitA' || substance === 'vitD') {
+                    circle.querySelector('.amount').innerText = `${newAmount.toFixed(2)} / ${totalAmount.toFixed(2)} ${unit}`;
+                } else {
+                    circle.querySelector('.amount').innerText = `${newAmount.toFixed(1)} / ${totalAmount.toFixed(1)} ${unit}`;
+                }
+                
+                popup.classList.remove('active');
+                amountInput.value = ''; // 清空输入框
+            });
+        });
+    </script>
+</body>
+</html>

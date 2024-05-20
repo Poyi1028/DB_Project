@@ -1,0 +1,70 @@
+.headline{
+    text-align: center;
+    text-decoration :underline;
+    font-family:'Courier New';
+    font-size: 60px;
+    font-weight: bold;
+    color:#8E8E8E ;
+    margin-bottom:20px;
+}
+.select-box{
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Courier New';
+    color:#7373B9;
+    font-weight: bold;
+    margin: 3%;
+}
+select{
+    font-size: 50px;
+    text-align: center;
+    width: 10%;
+    font-size: 50px;
+    font-weight: bold;
+}
+.tooltip-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    margin: 43%;
+}
+
+.tooltip-button img {
+    width: 100px; /* 调整大小 */
+    height: 70px;
+    margin-bottom: 3%;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* 将提示文字放置在按钮上方 */
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip-button:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+.completion-text {
+    font-size: 20px;
+    color: #7373B9;
+    font-weight: bold;
+    font-family: 'Courier New';
+    position: absolute;
+    top: -300%;
+    left: calc(100% + 5px); /* 将文本放置在图片的右侧，间距为 10px */
+    transform: translateY(-50%);
+    width: 80px;
+}

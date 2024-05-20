@@ -1,0 +1,126 @@
+.frame{
+    display: flex; /*讓下一層次水平排列*/
+}
+.right{
+    display: flex; /*讓下一層次水平排列*/
+    justify-content: center;
+    flex:auto; /*固定配置*/
+    text-align: center;
+}
+.btn{
+    flex: none;
+    text-align: center;
+    width: 100px;
+    padding: 5px 11px;
+    margin: 4px;
+    border: none;
+    cursor: pointer;
+
+}
+
+.container {
+    display: flex; /* 使用 Flexbox 布局 */
+    justify-content: center; /* 水平居中按钮 */
+    align-items: center; /* 垂直居中按钮 */
+    height: 110px; /* 设置容器高度为视窗高度 */
+}
+
+.container_time{
+    display: flex;
+    justify-content: space-between; /* 將內部元素在主軸上分散對齊，將末端對齊 */
+    align-items: center;
+}
+
+.myTime{
+    width: 70%;
+    padding-left: 5%;
+    text-align: left;
+    font-size: 50px;
+    font-family: sans-serif;
+    margin-right: auto;
+}
+
+.end_btn{
+    text-align: center;
+    border: rgba(54, 52, 52, 0.76);
+    border-style: solid;
+    background-color: #58caca;
+    font-size: 30px;
+    justify-items: end;
+    padding: 10px;
+}
+
+.start_btn {
+    border-radius: 12px;
+    background-color: #3D7878;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    padding: 20px;
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: bold;
+    width: 77%;
+}
+.headline{
+    text-align: center;
+    text-decoration :underline;
+    font-family:'Courier New';
+    font-size: 60px;
+}
+/* @media screen {
+    body {
+        background-color: #f3a2b49d;
+        border-color: black;
+        height: 720px;
+        border-width: 2px;
+        width: 480px;
+    }
+} */
+
+/*表格設定：較動不到的地方*/
+.wrap{
+    overflow:hidden;
+    border-radius:10px 10px 0px 0px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
+    max-width: 80%;
+    margin: 0 auto;
+  }
+  
+  table{
+    font-family: 'Oswald', sans-serif;
+    border-collapse:collapse;
+    margin: 0 auto;
+    margin-bottom: 5px;
+  
+  }
+  
+  th{
+    width:25vw;
+    height:75px;
+  }
+  
+  td{
+    background-color:#ffffff;
+    width:25vw;
+    height:50px;
+    text-align:center;
+  }
+  
+  tr{
+    border-bottom: 1px solid #dddddd;
+  }
+
+ 
+  tr td:first-child{
+    color:rgba(70, 115, 212, 0.904);
+    border-left:5px solid rgba(79, 193, 210, 0.801);
+  }
+  tr:last-of-type{
+    border-bottom: 2px solid #009879;
+  }
+  
+  tr:nth-of-type(even) td{
+    background-color:#f3f3f3;
+  }
+  
