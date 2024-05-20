@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Title</title>
+    </head>
+
+    <script type="text/javascript">
+        function test(element){
+            console.log(element.id)
+        }
+    </script>
+
+    <body>
+        <h1>Search</h1>
+
+        <a href="/gym">
+            <div class="row" id="gym" onclick="test(this)">
+                <div>Gym</div>
+            </div>
+        </a>
+
+        <a href="/equipment">
+            <div class="row" id="equipment" onclick="test(this)">
+                <div>Equipment</div>
+            </div>
+        </a>
+
+        <a href="/coach">
+            <div class="row" id="coach" onclick="test(this)">
+                <div>Coach</div>
+            </div>
+        </a>
+
+        <a href="/course">
+            <div class="row" id="course" onclick="test(this)">
+                <div>Course</div>
+            </div>
+        </a>
+    </body>
+</html>
