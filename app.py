@@ -1,4 +1,4 @@
-from flask import Flask, redirect, request, render_template, flash
+from flask import Flask, redirect, request, render_template
 import pymysql
 
 app = Flask(__name__)
@@ -66,6 +66,21 @@ def register():
             return str(e)
         finally:
             cursor.close()
+
+# 紀錄功能主頁面
+@app.route('/record')
+def record():
+    return render_template('record.html')
+
+# 飲食紀錄頁面
+@app.route('/record.diet')
+def diet_record():
+    return render_template('diet_record.html')
+
+# 健身紀錄頁面
+@app.route('/record.workout')
+def workout_record():
+    return render_template('workout_record.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
