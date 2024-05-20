@@ -23,7 +23,7 @@ CREATE TABLE equipment_training_area(
     Trainging_Area VARCHAR(45) NOT NULL
 );
 
-CREATE TABLE equipment_trainging_detail(
+CREATE TABLE equipment_training_detail(
 	Equipment_ID INT NOT NULL PRIMARY KEY,
     Training_Detail VARCHAR(45) NULL DEFAULT NULL
 );

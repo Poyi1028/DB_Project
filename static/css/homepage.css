@@ -13,25 +13,12 @@
     align-items: center; /* 水平居中對齊 */
     width: 90%; /* 佔據網頁寬度的90% */
 }
-.one-icon-button{
-    display: flex;
-    flex-direction: column; /* 將元素垂直排列 */
-    align-items: center; /* 水平居中對齊 */
-    width: 100%; /* 佔據網頁寬度的100% */
-}
 .icon-button svg {
     width: 80vh; /* 圖示寬度 */
     height: 80vh; /* 圖示高度 */
-}
-.one-icon-button svg{
-    width: 35vh; 
-    height: 35vh; 
 }
 .icon-button span {
     font-size: 14px; /* 文字大小 */
     margin-top: 4px; /* 文字與圖示之間的間距 */
 }
-.one-icon-button span{
-    font-size: 18px; 
-    margin-top: 6px; 
-}
+
