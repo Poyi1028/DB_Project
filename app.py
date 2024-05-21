@@ -82,8 +82,9 @@ def diet_record():
 def workout_record():
     return render_template('workout_record.html')
 
-@app.route('/test')
-def test():
+# 菜單頁面
+@app.route('/menu')
+def menu():
     return render_template('plan01.html')
 
 if __name__ == '__main__':
