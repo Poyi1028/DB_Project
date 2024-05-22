@@ -9,19 +9,19 @@ def get_db_conn():
     conn = pymysql.connect(host='localhost', user='root', password='password', database='mydb')
     return conn
 
-# 首頁
+# 登入/註冊頁面
 @app.route('/')
 def index():
-    return render_template('homepage.html')
+    return render_template('index.html')
 
-# 獲取登入視窗的資料
-@app.route('/login', methods=['POST'])
+# 登入成功後至首頁
+@app.route('/home', methods=['POST'])
 def login():
     if request.method == 'POST':
 
         # 獲取前端輸入的數據
-        id = request.form['login_id']
-        password = request.form['login_password']
+        id = request.form['login_ID']
+        password = request.form['login_ps']
         session['id'] = id # 存放使用者資訊供後續頁面使用
 
         # 從資料庫比對資料，有資料則登入成功
@@ -37,7 +37,7 @@ def login():
                 if user is None:
                     return render_template('fail.html')
                 else:
-                    return render_template('login.html')
+                    return render_template('homepage.html')
                 
         except Exception as e:
             return str(e)
@@ -51,18 +51,25 @@ def register():
     if request.method == 'POST':
 
         # 獲取前端輸入的數據
-        id = request.form['regis_id']
-        password = request.form['regis_password']
+        id = request.form['regis_ID']
+        password = request.form['regis_ps']
+        password2 = request.form['confirm_ps']
         name = request.form['name']
+        height = request.form['height']
+        weight = request.form['weight']
+        gender = request.form['gender']
 
         # 插入數據到 MySQL
         try:
             conn = get_db_conn()
             with conn.cursor() as cursor:
-                sql = 'INSERT INTO user VALUES (%s, %s, %s)'
-                cursor.execute(sql, (id, password, name))
+                sql = 'INSERT INTO user VALUES (%s, %s, %s, %s, %s, %s)'
+                cursor.execute(sql, (id, password, name, height, weight, gender))
                 conn.commit()
-            return render_template('register.html')
+                if password == password2:
+                    return render_template('register.html')
+                else:
+                    return '密碼不一致'
         except Exception as e:
             return str(e)
         finally:
