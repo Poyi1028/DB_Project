@@ -150,5 +150,10 @@ def coach():
 def course():
     return render_template('course.html')
 
+# 會員專區頁面
+@app.route('/member')
+def member():
+    return render_template('membership.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
