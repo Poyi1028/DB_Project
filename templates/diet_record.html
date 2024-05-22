@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DietRecord</title>
+    <script>
+      function RecordPage(){
+        window.location.href = '/record.diet.search';
+      }
+    </script>
     <link rel="stylesheet" type ="text/css"  href="/static/css/diet_record.css" />
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
@@ -16,9 +21,10 @@
 <body>
     <div class="head"><h3>飲食攝取量</h3></div>
     <div class="head">選擇日期：</div>
-    <div class="frame">
+    <form action="/record.diet.search" method="POST">
+      <div class="frame">
         <div class="input-group date" id='date1'>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" name="date" value="{{ date }}"/>
             <span class="input-group-addon">
                 <i class="glyphicon glyphicon-calendar"></i>
             </span>
@@ -31,27 +37,28 @@
         </button>
         </div>
     </div>
+    </form>
     <div id="nutrition-table-container">
         <table>
             <tr>
               <th class="left-column">總熱量</th>
-              <td></td>
+              <td>{{ calary }}</td>
             </tr>
             <tr>
               <th class="left-column">蛋白質</th>
-              <td></td>
+              <td>{{ protein }}</td>
             </tr>
             <tr>
               <th class="left-column">碳水化合物</th>
-              <td></td>
+              <td>{{ carbon }}</td>
             </tr>
             <tr>
               <th class="left-column">脂肪</th>
-              <td></td>
+              <td>{{ fath }}</td>
             </tr>
             <tr>
               <th class="left-column">水</th>
-              <td></td>
+              <td>{{ waterh }}</td>
             </tr>
           </table>
     </div>

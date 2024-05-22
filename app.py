@@ -1,4 +1,4 @@
-from flask import Flask, redirect, request, render_template
+from flask import Flask, redirect, request, render_template, session
 import pymysql
 
 app = Flask(__name__)
@@ -22,6 +22,7 @@ def login():
         # 獲取前端輸入的數據
         id = request.form['login_id']
         password = request.form['login_password']
+        session['id'] = id # 存放使用者資訊供後續頁面使用
 
         # 從資料庫比對資料，有資料則登入成功
         try:
@@ -74,8 +75,33 @@ def record():
 
 # 飲食紀錄頁面
 @app.route('/record.diet')
-def diet_record():
+def diet_redord():
     return render_template('diet_record.html')
+
+@app.route('/record.diet.search', methods = ['POST'])
+def diet_record_search():
+    date = request.form['date']
+    Date = date.replace('-', '')
+    try:
+        conn = get_db_conn()
+        with conn.cursor() as cursor:
+            sql = ('SELECT Calaries_Intake, Protein_intake, Carbonhydrate_Intake, Fat_Intake, Water_Intake '
+                   'FROM nutrient_supplement_tracking '
+                   'WHERE Date = %s AND User_ID = %s')
+            cursor.execute(sql, (int(Date), int(session['id'])))
+            conn.commit()
+            # 獲取查詢結果
+            result = cursor.fetchone()
+            if result:
+                cal, pro, car, fat, water = result
+            else:
+                return "No data found!"
+
+        return render_template('diet_record.html', date = date, calary = cal, protein = pro, carbon = car, fath = fat, waterh = water)
+    except Exception as e:
+        return str(e)
+    finally:
+        cursor.close()
 
 # 健身紀錄頁面
 @app.route('/record.workout')
