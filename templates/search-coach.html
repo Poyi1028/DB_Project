@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健身教練搜尋</title>
+    <link rel="stylesheet" href="/static/css/search-branch-layout.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="headline">健身教練</div>
+        <div class="search-section">
+            <div class="form-group">
+                <label for="gym-select">選擇健身房</label>
+                <select id="gym-select" class="form-control">
+                    <option value="gym1">健身房 1</option>
+                    <option value="gym2">健身房 2</option>
+                    <option value="gym3">健身房 3</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="body-part-select">專長</label>
+                <select id="body-part-select" class="form-control">
+                    <option value="arms">手臂</option>
+                    <option value="legs">腿部</option>
+                    <option value="chest">胸部</option>
+                    <option value="back">背部</option>
+                    <option value="abs">腹部</option>
+                    <option value="show">健美</option>
+                    <option value="retire">復健</option>
+                </select>
+            </div>
+            <button id="search-button" class="btn btn-primary mt-4">搜尋</button>
+        </div>
+        <div id="results-section" class="mt-5">
+            <!-- 假數據展示區 -->
+        </div>
+    </div>
+    <script>
+        document.getElementById('search-button').addEventListener('click', function() {
+            const selectedCourse = document.getElementById('body-part-select').value;
+
+            // 模擬資料
+            const results = [
+                {
+                    img: 'hand-in.jpg',
+                    name: '教練D',
+                    parts: '專長1、專長2',
+                    height: '178 cm',
+                    weight: '80 kg'
+                },
+                {
+                    img: 'hand-in.jpg',
+                    name: '教練E',
+                    parts: '專長3、專長4',
+                    height: '180 cm',
+                    weight: '75 kg'
+                },
+                {
+                    img: 'hand-in.jpg',
+                    name: '教練F',
+                    parts: '專長5、專長6',
+                    height: '175 cm',
+                    weight: '70 kg'
+                }
+            ];
+
+            const resultsSection = document.getElementById('results-section');
+            resultsSection.innerHTML = ''; // 清空之前的結果
+
+            results.forEach(result => {
+                const card = document.createElement('div');
+                card.className = 'result-card';
+
+                const img = document.createElement('img');
+                img.src = result.img;
+                img.alt = result.name;
+
+                const name = document.createElement('h4');
+                name.textContent = result.name;
+
+                const parts = document.createElement('p');
+                parts.textContent = `專長: ${result.parts}`;
+
+                const height = document.createElement('p');
+                height.textContent = `身高: ${result.height}`;
+
+                const weight = document.createElement('p');
+                weight.textContent = `體重: ${result.weight}`;
+
+                card.appendChild(img);
+                card.appendChild(name);
+                card.appendChild(parts);
+                card.appendChild(height);
+                card.appendChild(weight);
+
+                resultsSection.appendChild(card);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+body {
+    background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    padding: 10px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.headline {
+    text-align: center;
+    font-size: 8em;
+    font-family: 'Cursive', sans-serif;
+    text-shadow: #6aa6ff 5px 6px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+}
+
+.tooltip-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    margin: 0 1em;
+    text-align: center;
+    color: #0066CC;
+}
+
+.tooltip-button svg {
+    width: 80px;
+    height: 70px;
+}
+
+.tooltip-button .label {
+    display: block;
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 140px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -70px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip-button:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 0.8em;
+    color: #888;
+}
+
+.section {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.section:nth-child(odd) {
+    background-color: #e3f2fd;
+}
+
+.section:nth-child(even) {
+    background-color: #ffebee;
+}
+
+.section-icon {
+    width: 80px;
+    height: 80px;
+    fill: #616263e0;
+}
+
+.section-content {
+    flex-grow: 1;
+    margin-left: 30px;
+    font-weight: bold;
+}
+

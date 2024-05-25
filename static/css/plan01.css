@@ -7,12 +7,13 @@ body{
 
 .headline1{
     text-align: left;
-    color: rgb(130, 139, 139,0.678);
+    color: rgb(130, 139, 139,0.986);
     padding-left: 5%;
+    margin-top: 2%;
 }
 .headline2{
     text-align: left;
-    color: rgba(130, 139, 139);
+    color: rgb(69, 71, 71);
     padding-left: 10%;
 }
 
@@ -21,7 +22,7 @@ body{
     margin-left: 23%;
     font-size: 100px;
     font-family:cursive;
-    text-shadow:rgba(238, 22, 22, 0.658) 5px 5px;;
+    text-shadow:#46A3FF 5px 5px;;
 }
 
 /* .btn{
@@ -36,13 +37,12 @@ body{
     border: none;
     cursor: pointer;
     position: relative;
-    margin-left: 92%;
+    margin-left: 80%;
 }
 
 .tooltip-button img {
     width: 80px; /* 调整大小 */
     height: 70px;
-    margin-bottom: 3%;
 }
 
 .tooltip-text {

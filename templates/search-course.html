@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健身課程搜尋</title>
+    <link rel="stylesheet" href="/static/css/search-branch-layout.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="headline">健身課程</div>
+        <div class="search-section">
+            <div class="form-group">
+                <label for="gym-select">選擇健身房</label>
+                <select id="gym-select" class="form-control">
+                    <option value="gym1">健身房 1</option>
+                    <option value="gym2">健身房 2</option>
+                    <option value="gym3">健身房 3</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="body-part-select">課程名稱</label>
+                <select id="body-part-select" class="form-control">
+                    <option value="激烈有氧班">激烈有氧班</option>
+                    <option value="銀髮有氧班">銀髮有氧班</option>
+                    <option value="專家飛輪班">專家飛輪班</option>
+                    <option value="休閒飛輪班">休閒飛輪班</option>
+                </select>
+            </div>
+            <button id="search-button" class="btn btn-primary mt-4">搜尋</button>
+        </div>
+        <div id="results-section" class="mt-5">
+            <!-- 假數據展示區 -->
+        </div>
+    </div>
+    <script>
+        document.getElementById('search-button').addEventListener('click', function() {
+            const selectedCourse = document.getElementById('body-part-select').value;
+
+            // 模擬資料
+            const results = [
+                {
+                    img: 'hand-in.jpg',
+                    name: selectedCourse,
+                    time: 'Fri. 9 AM ~ 10 AM',
+                    coach: '教練A'
+                },
+                {
+                    img: 'hand-in.jpg',
+                    name: selectedCourse,
+                    time: 'Sat. 4 PM ~ 5 PM',
+                    coach: '教練B'
+                },
+                {
+                    img: 'hand-in.jpg',
+                    name: selectedCourse,
+                    time: 'Sun. 11 AM ~ 12 AM',
+                    coach: '教練C'
+                }
+            ];
+
+            const resultsSection = document.getElementById('results-section');
+            resultsSection.innerHTML = ''; // 清空之前的結果
+
+            results.forEach(result => {
+                const card = document.createElement('div');
+                card.className = 'result-card';
+
+                const img = document.createElement('img');
+                img.src = result.img;
+                img.alt = result.name;
+
+                const name = document.createElement('h4');
+                name.textContent = result.name;
+
+                const times = document.createElement('p');
+                times.textContent = `訓練時段:${result.time}`;
+
+                const coach = document.createElement('p');
+                coach.textContent = `帶班教練: ${result.coach}`;
+
+                card.appendChild(img);
+                card.appendChild(name);
+                card.appendChild(times);
+                card.appendChild(coach);
+
+                resultsSection.appendChild(card);
+            });
+        });
+    </script>
+</body>
+</html>
