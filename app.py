@@ -15,7 +15,7 @@ def index():
     return render_template('index.html')
 
 # 登入成功後至首頁
-@app.route('/home', methods=['POST'])
+@app.route('/home', methods=['GET','POST'])
 def login():
     if request.method == 'POST':
 
@@ -43,6 +43,8 @@ def login():
             return str(e)
         finally:
             cursor.close()
+    else:
+        return render_template('homepage.html')
 
 
 # 獲取註冊視窗的資料
@@ -81,7 +83,7 @@ def record():
     return render_template('record.html')
 
 # 飲食紀錄頁面
-@app.route('/record.diet')
+@app.route('/record/diet')
 def diet_redord():
     return render_template('diet_record.html')
 
@@ -102,8 +104,8 @@ def diet_record_search():
             if result:
                 cal, pro, car, fat, water = result
             else:
-                return "No data found!"
-        return render_template('diet_record.html', date = date, calary = cal, protein = pro,
+                return 'No result found'
+        return render_template('diet_record.html', date = Date, calary = cal, protein = pro,
                                carbon = car, fath = fat, waterh = water)
     except Exception as e:
         return str(e)
@@ -111,49 +113,59 @@ def diet_record_search():
         cursor.close()
 
 # 健身紀錄頁面
-@app.route('/record.workout')
+@app.route('/record/workout')
 def workout_record():
+    # try:
+    #     conn = get_db_conn()
+    #     with conn.cursor() as cursor:
+    #         sql = ''
+    #         cursor.execute(sql)
+    #         conn.commit()
+    # except Exception as e:
+    #     return str(e)
+    # finally:
+    #     cursor.close()
     return render_template('workout_record.html')
 
 # 菜單主頁面
-@app.route('/menu')
+@app.route('/plan')
 def menu():
     return render_template('plan01.html')
 
 # 健身菜單頁面
-@app.route('/menu.workout')
+@app.route('/plan/workout')
 def workout_menu():
     return render_template('plan02-exercise.html')
 
 # 飲食菜單頁面
-@app.route('/menu.nutrition')
+@app.route('/plan/nutrition')
 def nutrition_menu():
     return render_template('plan02-food.html')
 
 # 搜尋主頁面
 @app.route('/search')
 def search():
-    return render_template('search.html')
+    return render_template('search-homepage.html')
 
 # 健身房搜尋頁面
-@app.route('/gym')
+@app.route('/search/gym')
 def gym():
     return render_template('gym.html')
 
 # 器材搜尋頁面
-@app.route('/equipment')
+@app.route('/search/equipment')
 def equipment():
-    return  render_template('equipment.html')
+    return  render_template('search-equipment.html')
 
 # 教練搜尋頁面
-@app.route('/coach')
+@app.route('/search/coach')
 def coach():
-    return render_template('coach.html')
+    return render_template('search-coach.html')
 
 # 課程搜尋頁面
-@app.route('/course')
+@app.route('/search/course')
 def course():
-    return render_template('course.html')
+    return render_template('search-course.html')
 
 # 會員專區頁面
 @app.route('/member')
