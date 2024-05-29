@@ -329,15 +329,16 @@
         </div>
     </div>
     <script>
-        document.getElementById('toggleButton').addEventListener('click', function() {
-            var button = this;
-            if (button.classList.contains('completed')) {
-                button.classList.remove('completed');
-                button.textContent = '未完成';
-            } else {
-                button.classList.add('completed');
-                button.textContent = '已完成';
-            }
+        document.querySelectorAll('.status-button').forEach(button => {
+            button.addEventListener('click', function() {
+                if (button.classList.contains('completed')) {
+                    button.classList.remove('completed');
+                    button.textContent = '未完成';
+                } else {
+                    button.classList.add('completed');
+                    button.textContent = '已完成';
+                }
+            });
         });
     </script>
 </body>
