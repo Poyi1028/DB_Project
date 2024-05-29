@@ -12,10 +12,32 @@ body {
 
 .headline {
     text-align: center;
-    font-size: 7em;
+    font-size: 4em;
     font-family: 'Cursive', sans-serif;
-    color:#32403ede ;
-    text-shadow: #6aa6ff 5px 6px;
+    color: #32403ede;
+    text-shadow: #6aa6ff 2px 3px;
+}
+
+.back-button {
+    position: absolute;
+    top: 10px;
+    left: 22.5%;
+    background-color:#006779;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: #32403ede;
+    display: flex;
+    align-items: center;
+    margin: 2%;
+    padding: 5px;
+    color: aliceblue;
+    font-weight: bold;
+    border-radius: 7px;
+}
+
+.back-button svg {
+    margin-right: 5px;
 }
 
 .container {
