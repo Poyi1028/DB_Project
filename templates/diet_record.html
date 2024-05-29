@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DietRecord</title>
-  <link rel="stylesheet" type="text/css" href="diet_record.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/diet_record.css" />
   <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
     rel="stylesheet" />
@@ -21,44 +21,46 @@
     <h3>飲食攝取量</h3>
   </div>
   <div class="head">選擇日期：</div>
-  <div class="frame">
-    <div class="input-group date" id='date1'>
-      <input type="text" class="form-control" />
-      <span class="input-group-addon">
-        <i class="glyphicon glyphicon-calendar"></i>
-      </span>
+  <form action="/record/diet/search" method="POST">
+    <div class="frame">
+      <div class="input-group date" id='date1'>
+        <input type="text" class="form-control" name="date"/>
+        <span class="input-group-addon">
+          <i class="glyphicon glyphicon-calendar"></i>
+        </span>
+      </div>
+      <div>
+        <button>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+            viewBox="0 0 16 16">
+            <path
+              d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+          </svg>
+        </button>
+      </div>
     </div>
-    <div>
-      <button>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
-          viewBox="0 0 16 16">
-          <path
-            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-        </svg>
-      </button>
-    </div>
-  </div>
+  </form>
   <div id="nutrition-table-container">
     <table>
       <tr>
         <th class="left-column">總熱量(kcal)</th>
-        <td></td>
+        <td>{{calary}}</td>
       </tr>
       <tr>
         <th class="left-column">蛋白質(g)</th>
-        <td></td>
+        <td>{{protein}}</td>
       </tr>
       <tr>
         <th class="left-column">碳水化合物(g)</th>
-        <td></td>
+        <td>{{carbon}}</td>
       </tr>
       <tr>
         <th class="left-column">脂肪(g)</th>
-        <td></td>
+        <td>{{fath}}</td>
       </tr>
       <tr>
         <th class="left-column">水(ml)</th>
-        <td></td>
+        <td>{{waterh}}</td>
       </tr>
     </table>
   </div>
@@ -81,6 +83,10 @@
       //'2021-12-25'
       //]
     });
+
+    function Search(){
+      window.location.href = '/record/diet/search';
+    }
   </script>
 
 

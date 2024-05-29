@@ -1,12 +1,18 @@
 from flask import Flask, redirect, request, render_template, session
 import pymysql
+import pymysql.cursors
 
 app = Flask(__name__)
 app.secret_key = 'my secret key'
 
 # MySQL 連接
 def get_db_conn():
-    conn = pymysql.connect(host='localhost', user='root', password='password', database='mydb')
+    conn = pymysql.connect(
+        host='localhost',
+        user='root',
+        password='password',
+        database='mydb'
+    )
     return conn
 
 # 登入/註冊頁面
@@ -87,10 +93,11 @@ def record():
 def diet_redord():
     return render_template('diet_record.html')
 
-@app.route('/record.diet.search', methods = ['POST'])
+@app.route('/record/diet/search', methods = ['POST'])
 def diet_record_search():
     date = request.form['date']
     Date = date.replace('-', '')
+
     try:
         conn = get_db_conn()
         with conn.cursor() as cursor:
@@ -101,10 +108,12 @@ def diet_record_search():
             conn.commit()
             # 獲取查詢結果
             result = cursor.fetchone()
+
             if result:
                 cal, pro, car, fat, water = result
             else:
                 return 'No result found'
+            
         return render_template('diet_record.html', date = Date, calary = cal, protein = pro,
                                carbon = car, fath = fat, waterh = water)
     except Exception as e:
@@ -115,18 +124,37 @@ def diet_record_search():
 # 健身紀錄頁面
 @app.route('/record/workout')
 def workout_record():
-    # try:
-    #     conn = get_db_conn()
-    #     with conn.cursor() as cursor:
-    #         sql = ''
-    #         cursor.execute(sql)
-    #         conn.commit()
-    # except Exception as e:
-    #     return str(e)
-    # finally:
-    #     cursor.close()
     return render_template('workout_record.html')
 
+@app.route('/record/workout/search', methods = ['GET', 'POST'])
+def workout_record_search():
+    if request.method == 'POST':
+
+        date = request.form['date'].replace('-', '')
+
+        try:
+            conn = get_db_conn()
+            with conn.cursor() as cursor:
+                sql = ("SELECT Equipment_Name, Object, Training_Area, Training_Detail, Weight, `Set` "
+                    "FROM exercise_plan as plan LEFT JOIN equipment as e "
+                    "ON plan.Equipment_ID = e.Equipment_ID "
+                    "WHERE Status = 'Done' "
+                    "AND Completed_Date = %s "
+                    "AND User_ID = %s")
+                cursor.execute(sql, (int(date), int(session['id'])))
+                records = cursor.fetchall()
+                # 將傳回的tuple轉換成字典
+                records = [{'Equipment_Name': r[0], 'Object': r[1], 'Training_Area': r[2],
+                            'Training_Detail': r[3], 'Weight': r[4], 'Set': r[5]} for r in records]
+        except Exception as e:
+            return str(e)
+        finally:
+            cursor.close()
+
+        return render_template('workout_record.html', records = records)
+    else:
+        return render_template('workout_record.html')
+    
 # 菜單主頁面
 @app.route('/plan')
 def menu():
@@ -134,8 +162,13 @@ def menu():
 
 # 健身菜單頁面
 @app.route('/plan/workout')
-def workout_menu():
+def workout_plan():
     return render_template('plan02-exercise.html')
+
+# 健身菜單製作
+@app.route('/plan/workout/make')
+def workout_make():
+    return render_template('plan03-exercise.html')
 
 # 飲食菜單頁面
 @app.route('/plan/nutrition')
@@ -171,6 +204,11 @@ def course():
 @app.route('/member')
 def member():
     return render_template('membership.html')
+
+# GYPT頁面
+@app.route('/gypt')
+def gypt():
+    return render_template('ranking-list.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

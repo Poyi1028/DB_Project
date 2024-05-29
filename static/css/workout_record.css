@@ -13,7 +13,7 @@ body {
 h1,
 h3 {
     text-align: center;
-    color: #013e80;
+    color: rgb(13, 116, 241);
     /* 蓝色标题 */
 }
 
@@ -88,12 +88,13 @@ td {
 }
 
 th {
-    background-color: #06315e;
+    background-color: #5381d1;
     /* 蓝色表头背景 */
     color: white;
     /* 白色表头文字 */
     font-size: 20px;
     /* 放大表头字体 */
+    text-align: center;
 }
 
 tr:nth-child(even) {
