@@ -1,6 +1,7 @@
 from flask import Flask, redirect, request, render_template, session
 import pymysql
-import pymysql.cursors
+import matplotlib.pyplot as plt
+import io, base64
 
 app = Flask(__name__)
 app.secret_key = 'my secret key'
@@ -250,9 +251,50 @@ def course():
     return render_template('search-course.html')
 
 # 會員專區頁面
-@app.route('/member')
+@app.route('/member', methods=['GET', 'POST'])
 def member():
-    return render_template('membership.html')
+    if request.method == 'POST':
+        name = request.form['name']
+        height = request.form['height']
+        weight = request.form['weight']
+        gender = request.form['gender']
+        obj = request.form['obj']
+        age = request.form['age']
+
+        try:
+            conn = get_db_conn()
+            with conn.cursor() as cursor:
+                sql=('UPDATE user '
+                    'SET Name = %s, Height = %s, Weight = %s, Gender = %s, Objective = %s, Age = %s '
+                    'WHERE User_ID = %s')
+                cursor.execute(sql, (name, float(height), float(weight), gender, obj, int(age), int(session['id'])))
+                conn.commit()
+                return render_template('member.html')
+        except Exception as e:
+            return str(e)
+        finally:
+            cursor.close()
+    else:
+        try:
+            conn = get_db_conn()
+            with conn.cursor() as cursor:
+                # 從 user 中獲取基本資料
+                sql = ('SELECT User_ID, Name, Height, Weight, Gender, Objective, Age '
+                       'FROM user '
+                       'WHERE User_id = %s')
+                cursor.execute(sql, (int(session['id'])))
+                results = cursor.fetchone()
+                if results:
+                    id, name, height, weight, gender, obj, age = results
+                    id = int(id)
+                    height = float(height)
+                    weight = float(weight)
+                    age = int(age)
+                return render_template('member.html', id = id, name = name, height = height, weight = weight, gender = gender, obj = obj, age = age)
+        except Exception as e:
+            return str(e)
+        finally:
+            conn.close()
 
 # GYPT頁面
 @app.route('/gypt')
