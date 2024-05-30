@@ -7,49 +7,50 @@
         <link rel="stylesheet" type="text/css" href="/static/css/plan02-exercise.css"/>
     </head>
     <body>
-        <div class="headline">訓 練 目 標</div>
-        <div class="select-box">目標天數 
-            <select name="days">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-            </select>
+        <div class="container">
+            <div class="headline">訓 練 目 標</div>
+            <div class="select-box">目標天數 
+                <select name="days">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+            </div>
+            <div class="select-box">訓練部位
+                <select name="area">
+                    <option value="1">胸</option>
+                    <option value="2">肩</option>
+                    <option value="3">背</option>
+                    <option value="4">腿</option>
+                </select>
+            </div>
+            <div class="select-box">訓練強度 
+                <select name="days">
+                    <option value="1">強</option>
+                    <option value="2">中</option>
+                    <option value="3">輕</option>
+                </select>
+            </div>
+            <div class="button-container">
+                <button onclick="history.back()" class="back-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                    </svg>
+                    回上頁
+                </button>
+                <a href="/plan/workout/make" class="tooltip-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
+                        <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707z"/>
+                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                    </svg>
+                    <span class="completion-text">輸入完成</span>
+                    <span class="tooltip-text">製作專屬菜單</span>
+                </a>
+            </div> 
         </div>
-        <div class="select-box">訓練部位
-            <select name="area">
-                <option value="1">胸</option>
-                <option value="2">肩</option>
-                <option value="3">背</option>
-                <option value="4">腿</option>
-            </select>
-        </div>
-        <div class="select-box">訓練強度 
-            <select name="days">
-                <option value="1">強</option>
-                <option value="2">中</option>
-                <option value="3">輕</option>
-            </select>
-        </div>
-        <div class="button-container">
-            <button onclick="history.back()" class="back-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
-                </svg>
-                回上頁
-            </button>
-            <a href="/plan/workout/make" class="tooltip-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
-                    <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707z"/>
-                    <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
-                </svg>
-                <span class="completion-text">輸入完成</span>
-                <span class="tooltip-text">製作專屬菜單</span>
-            </a>
-        </div> 
-
     </body>
 </html>
