@@ -1,20 +1,59 @@
-.icon-button{
-    display: flex; 
-    flex-direction: column; /* 將元素垂直排列 */
-    align-items: center; /* 水平居中對齊 */
-    justify-content: center; /* 垂直居中對齊 */
-    width: 100%; /* 佔據網頁寬度的90% */
-    cursor: pointer;
+/* 設置 html 和 body 高度為 100% 以確保框架能夠覆蓋整個視口 */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.icon-button svg {
-    width:25vh; /* 圖示寬度 */
-    height: 40vh; /* 圖示高度 */
+
+/* 將框架置中在整個網頁 */
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(221, 234, 252);
 }
-.icon-button span {
-    font-size: 20px; /* 文字大小 */
-    margin-top: 2px; /* 文字與圖示之間的間距 */
-}
-.frame{
+
+/* 設置框架的高度和水平居中 */
+.frame {
     height: 50vh;
+    display: flex;
+    align-items: center;
+    /* 水平居中對齊 */
+    justify-content: center;
+    /* 垂直居中對齊 */
     cursor: pointer;
+    gap: 250px;
+}
+
+/* 設置按鈕樣式 */
+.icon-button {
+    display: flex;
+    flex-direction: column;
+    /* 將元素垂直排列 */
+    align-items: center;
+    /* 水平居中對齊 */
+    justify-content: center;
+    /* 垂直居中對齊 */
+    width: 100%;
+    /* 佔據容器寬度的30% */
+    cursor: pointer;
+    border-radius: 100%;
+    border: none;
+    background: none;
+}
+
+.icon-button svg {
+    width: 25vh;
+    /* 圖示寬度 */
+    height: 40vh;
+    /* 圖示高度 */
+}
+
+.icon-button span {
+    font-size: 20px;
+    /* 文字大小 */
+    margin-top: 2px;
+    /* 文字與圖示之間的間距 */
 }
