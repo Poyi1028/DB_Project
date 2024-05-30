@@ -28,7 +28,9 @@ def login():
         # 獲取前端輸入的數據
         id = request.form['login_ID']
         password = request.form['login_ps']
-        session['id'] = id # 存放使用者資訊供後續頁面使用
+
+        # 存放使用者資訊供後續頁面使用
+        session['id'] = id 
 
         # 從資料庫比對資料，有資料則登入成功
         try:
@@ -44,7 +46,6 @@ def login():
                     return render_template('fail.html')
                 else:
                     return render_template('homepage.html')
-                
         except Exception as e:
             return str(e)
         finally:
@@ -101,6 +102,7 @@ def diet_record_search():
     try:
         conn = get_db_conn()
         with conn.cursor() as cursor:
+            # 從所選的日期、預存取的 ID 找出飲食紀錄的 relation
             sql = ('SELECT Calaries_Intake, Protein_intake, Carbonhydrate_Intake, Fat_Intake, Water_Intake '
                    'FROM nutrient_supplement_tracking '
                    'WHERE Date = %s AND User_ID = %s')
@@ -135,6 +137,7 @@ def workout_record_search():
         try:
             conn = get_db_conn()
             with conn.cursor() as cursor:
+                # 從所選日期和 ID 透過 Join 找出符合的數據
                 sql = ("SELECT Equipment_Name, Object, Training_Area, Training_Detail, Weight, `Set` "
                     "FROM exercise_plan as plan LEFT JOIN equipment as e "
                     "ON plan.Equipment_ID = e.Equipment_ID "
@@ -173,7 +176,53 @@ def workout_make():
 # 飲食菜單頁面
 @app.route('/plan/nutrition')
 def nutrition_menu():
-    return render_template('plan02-food.html')
+    #if request.method == 'POST':
+
+        try:
+            conn = get_db_conn()
+            with conn.cursor() as cursor:
+                # 先讀取使用者的身高、體重、性別、健身目標、年齡
+                sql=('SELECT Height, Weight, Gender, Objective, Age '
+                     'FROM user '
+                     'WHERE User_ID = %s')
+                cursor.execute(sql, int(session['id']))
+                results = cursor.fetchone()
+
+                # 獲取資料庫數據
+                if results:
+                    height, weight, gender, obj, age = results
+                    height = float(height)
+                    weight = float(weight)
+                    age = int(age)
+                    # 計算基礎代謝率 BMR
+                    if gender == 'male':
+                        bmr = 88.632 + (13.397*weight) + (4.799*height) - (5.677*age)
+                    elif gender == 'female':
+                        bmr = 447.593 + (9.247*weight) + (3.098*height) - (4.33*age)
+                    # 套用營養攝取公式
+                    if obj == '增肌':
+                        protein = round(weight * 1.6, 0)
+                        carbs = round(weight * 4, 0)
+                        water = round(weight * 35, 0)
+                        fat = round(weight * 0.5, 0)
+                        cal = round(bmr * 1.725 * 1.1, 0)
+                    elif obj == '減脂':
+                        protein = round(weight * 1.8, 0)
+                        carbs = round(weight * 2, 0)
+                        water = round(weight * 35, 0)
+                        fat = round(weight * 0.5, 0)
+                        cal = round(bmr * 1.55 * 0.9, 0)
+                    elif obj == '維持身材':
+                        protein = round(weight * 1.2, 0)
+                        carbs = round(weight * 3, 0)
+                        water = round(weight * 35, 0)
+                        fat = round(weight * 0.8, 0)
+                        cal = round(bmr * 1.375, 0)
+            return render_template('plan02-food.html', protein = protein, carbs = carbs, water = water, fat = fat, cal = cal)
+        except Exception  as e:
+            return str(e)
+        finally:
+            cursor.close()
 
 # 搜尋主頁面
 @app.route('/search')

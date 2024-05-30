@@ -35,7 +35,7 @@
     /* 佔據網頁寬度的90% */
     padding: 20px;
     border-radius: 15px;
-    background-color: rgb(218, 217, 218);
+    background-color: white;
 }
 
 .icon-button svg {
@@ -53,7 +53,7 @@
 }
 
 body {
-    background-image: url('Homepage.jpg');
+    background-image: url('/static/Homepage.jpg');
     background-size: cover;
     /* 確保背景圖片覆蓋整個視口 */
     background-position: center;
@@ -70,7 +70,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(247, 244, 244, 0.3);
     /* 調整透明度和顏色 */
     z-index: 1;
 }

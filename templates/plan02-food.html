@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>健康摄入</title>
+    <title>健康攝取</title>
     <link rel="stylesheet" href="/static/css/plan02-food.css">
 </head>
 <body>
@@ -21,21 +21,21 @@
             <div class="circle water">
                 <div class="content">
                     <div class="name">水</div>
-                    <div class="amount">1.4 / 2.0 L</div>
+                    <div class="amount">0 / {{ water }} ml</div>
                 </div>
                 <button class="plus-button">+</button>
             </div>
             <div class="circle protein">
                 <div class="content">
                     <div class="name">蛋白質</div>
-                    <div class="amount">50.0 / 100.0 g</div>
+                    <div class="amount">0 / {{ protein }} g</div>
                 </div>
                 <button class="plus-button">+</button>
             </div>
             <div class="circle calories">
                 <div class="content">
                     <div class="name">熱量</div>
-                    <div class="amount">200.0 / 2500.0 cal</div>
+                    <div class="amount">0 / {{ cal }} cal</div>
                 </div>
                 <button class="plus-button">+</button>
             </div>
@@ -43,15 +43,15 @@
         <div class="row">
             <div class="circle vitA">
                 <div class="content">
-                    <div class="name">維生素A</div>
-                    <div class="amount">0.70 / 1.00 mg</div>
+                    <div class="name">碳水化合物</div>
+                    <div class="amount">0 / {{ carbs }} g</div>
                 </div>
                 <button class="plus-button">+</button>
             </div>
             <div class="circle vitD">
                 <div class="content">
-                    <div class="name">維生素D</div>
-                    <div class="amount">0.01 / 0.02 mg</div>
+                    <div class="name">脂肪</div>
+                    <div class="amount">0 / {{ fat }} g</div>
                 </div>
                 <button class="plus-button">+</button>
             </div>
@@ -63,10 +63,10 @@
             <option value="water">水</option>
             <option value="protein">蛋白質</option>
             <option value="calories">熱量</option>
-            <option value="vitA">維生素A</option>
-            <option value="vitD">維生素D</option>
+            <option value="vitA">碳水化合物</option>
+            <option value="vitD">脂肪</option>
         </select>
-        <textarea id="amount" placeholder="输入摄取量"></textarea>
+        <textarea id="amount" placeholder="輸入攝取量"></textarea>
         <button id="add-button">新增</button>
     </div>
     

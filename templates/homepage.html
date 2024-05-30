@@ -22,10 +22,13 @@
             window.location.href = '/'
         }
         function Homepage() {
-            window.location.gref = '/home'
+            window.location.href = '/home'
+        }
+        function gyptPage() {
+            window.location.href = '/gypt'
         }
     </script>
-    <link rel="stylesheet" type="text/css" href="homepage.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/homepage.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
@@ -37,38 +40,20 @@
 
 <div class="overlay">
 
-    <div class="membership">
-        <button data-bs-toggle="modal" data-bs-target="#loginModal"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
-                <path fill-rule="evenodd"
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
-            </svg><span>會員登出</span></button>
-    </div>
-    <!--跳出登入視窗-->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!--Header-->
-                <div class="modal-header">
-                    <h3 class="modal-title" id="loginModalLabel">會員登出系統</h3>
-                    <button class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <!--body-->
-                <div class="modal-body">
-                    <form action="/login" method="POST">
-                        <div>謝謝使用！</div>
-                        <!-- 送出按鈕 -->
-                        <button class="btn btn-info" onclick="Login">登出</button>
-                        <button class="btn btn-info" onclick="Homepage">取消</button>
-                    </form>
-                </div>
-            </div>
+    <form action="/" method="get">
+        <div class="membership">
+            <button data-bs-toggle="modal" data-bs-target="#loginModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                    height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                    <path fill-rule="evenodd"
+                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                </svg>
+                <span>會員登出</span>
+            </button>
         </div>
-    </div>
-
-
-
+    </form>
+    
     <div class="frame">
         <div class="icon-button-container">
             <button class="icon-button">
