@@ -202,7 +202,7 @@ def nutrition_menu():
                     'carbonhydrate': result[3],
                     'fat': result[4]
                 }
-                
+
                 nutrient_data['water'] = float(result_dict['water'])
                 nutrient_data['protein'] = float(result_dict['protein'])
                 nutrient_data['calories'] = float(result_dict['calories'])
@@ -372,20 +372,20 @@ def member():
 # GYPT頁面
 @app.route('/gypt')
 def gypt():
-    try:
-        conn = get_db_conn()
-        with conn.cursor() as cursor:
-            # 將資料庫中的時間戳記相減獲得訓練時長
-            time_sql = ('SELECT TIMESTAMPDIFF(MINUTE, MIN(Work_Time), MAX(Work_Time)) AS t '
-                        'FROM ( SELECT Work_Time FROM gypt WHERE User_ID = %s ORDER BY Work_Time DESC LIMIT 2) '
-                        'AS record;')
-            cursor.execute(time_sql, (int(session['id'])))
-            # 獲取結果
-            result = cursor.fetchone()
-    except Exception as e:
-        return str(e)
-    finally:
-        cursor.close()
+    # try:
+    #     conn = get_db_conn()
+    #     with conn.cursor() as cursor:
+    #         # 將資料庫中的時間戳記相減獲得訓練時長
+    #         time_sql = ('SELECT TIMESTAMPDIFF(MINUTE, MIN(Work_Time), MAX(Work_Time)) AS t '
+    #                     'FROM ( SELECT Work_Time FROM gypt WHERE User_ID = %s ORDER BY Work_Time DESC LIMIT 2) '
+    #                     'AS record;')
+    #         cursor.execute(time_sql, (int(session['id'])))
+    #         # 獲取結果
+    #         result = cursor.fetchone()
+    # except Exception as e:
+    #     return str(e)
+    # finally:
+    #     cursor.close()
     return render_template('ranking-list.html')
 
 # 介紹頁面
