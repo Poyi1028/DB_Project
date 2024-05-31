@@ -383,5 +383,10 @@ def member():
 def gypt():
     return render_template('ranking-list.html')
 
+# 介紹頁面
+@app.route('/intro')
+def intro():
+    return render_template('introduction.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

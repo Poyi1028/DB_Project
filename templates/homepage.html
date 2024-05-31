@@ -19,13 +19,16 @@
             window.location.href = '/member';
         }
         function Login() {
-            window.location.href = '/'
+            window.location.href = '/';
         }
         function Homepage() {
-            window.location.href = '/home'
+            window.location.href = '/home';
         }
         function gyptPage() {
-            window.location.href = '/gypt'
+            window.location.href = '/gypt';
+        }
+        function introPage() {
+            window.location.href = '/intro';
         }
     </script>
     <link rel="stylesheet" type="text/css" href="/static/css/homepage.css" />
@@ -56,7 +59,7 @@
     
     <div class="frame">
         <div class="icon-button-container">
-            <button class="icon-button">
+            <button class="icon-button" onclick="introPage()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-card-list" viewBox="0 0 16 16">
                     <path
