@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: center;
   /* 使输入栏和按钮居中 */
+  gap: 10px;
 }
 
 .head {
@@ -47,6 +48,10 @@ table {
   margin: 0 auto;
   /* 將表格置中 */
   border-collapse: collapse;
+  border-radius: 10px;
+  /* 修饰稜角 */
+  overflow: hidden;
+  /* 处理边框圆角问题 */
 }
 
 th,
@@ -60,7 +65,7 @@ td {
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: #a1bff3;
   width: 40%;
   /* 調整左欄寬度 */
 
@@ -73,6 +78,10 @@ td {
 
 /* 將第一欄文字右對齊 */
 .left-column {
+  text-align: center;
+}
+
+.right-column {
   text-align: center;
 }
 
@@ -93,4 +102,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+h1 {
+  text-align: center;
 }

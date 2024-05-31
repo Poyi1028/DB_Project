@@ -24,7 +24,7 @@
   <form action="/record/diet/search" method="POST">
     <div class="frame">
       <div class="input-group date" id='date1'>
-        <input type="text" class="form-control" name="date"/>
+        <input type="text" class="form-control" name="date" />
         <span class="input-group-addon">
           <i class="glyphicon glyphicon-calendar"></i>
         </span>
@@ -40,27 +40,28 @@
       </div>
     </div>
   </form>
+  <h1>Nutrition Record</h1>
   <div id="nutrition-table-container">
     <table>
       <tr>
         <th class="left-column">總熱量(kcal)</th>
-        <td>{{calary}}</td>
+        <td class="right-column">{{calary}}</td>
       </tr>
       <tr>
         <th class="left-column">蛋白質(g)</th>
-        <td>{{protein}}</td>
+        <td class="right-column">{{protein}}</td>
       </tr>
       <tr>
         <th class="left-column">碳水化合物(g)</th>
-        <td>{{carbon}}</td>
+        <td class="right-column">{{carbon}}</td>
       </tr>
       <tr>
         <th class="left-column">脂肪(g)</th>
-        <td>{{fath}}</td>
+        <td class="right-column">{{fath}}</td>
       </tr>
       <tr>
         <th class="left-column">水(ml)</th>
-        <td>{{waterh}}</td>
+        <td class="right-column">{{waterh}}</td>
       </tr>
     </table>
   </div>
@@ -84,7 +85,7 @@
       //]
     });
 
-    function Search(){
+    function Search() {
       window.location.href = '/record/diet/search';
     }
   </script>
