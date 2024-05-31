@@ -42,21 +42,26 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
+    gap: 30px;
+    align-items: center;
 }
 
 .row {
     display: flex;
     justify-content: space-around;
-    width: 60%; /* 调整宽度以控制圈圈的分隔 */
+    width: 100%; /* 调整宽度以控制圈圈的分隔 */
     margin: 10px 0;
+}
+.input{
+    background-color: transparent;
+    border-color: transparent;
 }
 
 .circle {
     position: relative;
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -64,7 +69,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 10px;
+    margin: 3em;
     text-align: center;
     cursor: pointer;
 }
@@ -74,13 +79,13 @@ body {
 }
 
 .name {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     color: #333;
 }
 
 .amount {
-    font-size: 16px;
+    font-size: 30px;
     color: #666;
 }
 
@@ -91,7 +96,7 @@ body {
     width: 30px;
     height: 30px;
     border: none;
-    background-color: #ff6600;
+    background-color: #2f96c6;
     color: #fff;
     border-radius: 50%;
     font-size: 20px;
