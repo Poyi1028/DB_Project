@@ -1,5 +1,6 @@
-from flask import Flask, redirect, request, render_template, session
+from flask import Flask, redirect, request, render_template, session, jsonify
 import pymysql
+from datetime import date
 import matplotlib.pyplot as plt
 import io, base64
 
@@ -175,18 +176,44 @@ def workout_make():
     return render_template('plan03-exercise.html')
 
 # 飲食菜單頁面
-@app.route('/plan/nutrition')
+@app.route('/plan/nutrition', methods=['GET', 'POST'])
 def nutrition_menu():
     #if request.method == 'POST':
+        today = date.today()
+        nutrient_data = {
+            'water': 0.0,
+            'protein': 0.0,
+            'calories': 0.0,
+            'carbohydrate': 0.0,
+            'fat': 0.0
+        }
 
         try:
             conn = get_db_conn()
             with conn.cursor() as cursor:
+                sql1 = "SELECT Water, Pro, Cals, Carbs, Fat FROM `nutrient_supplement_tracking` WHERE User_ID = %s AND Date = %s"
+                cursor.execute(sql1, (int(session['id']), today))
+                result = cursor.fetchone()
+                if result:
+                    result_dict = {
+                    'water': result[0],
+                    'protein': result[1],
+                    'calories': result[2],
+                    'carbonhydrate': result[3],
+                    'fat': result[4]
+                }
+                    
+                nutrient_data['water'] = float(result_dict['water'])
+                nutrient_data['protein'] = float(result_dict['protein'])
+                nutrient_data['calories'] = float(result_dict['calories'])
+                nutrient_data['carbohydrate'] = float(result_dict['carbonhydrate'])
+                nutrient_data['fat'] = float(result_dict['fat'])
+
                 # 先讀取使用者的身高、體重、性別、健身目標、年齡
-                sql=('SELECT Height, Weight, Gender, Objective, Age '
+                sql2=('SELECT Height, Weight, Gender, Objective, Age '
                      'FROM user '
                      'WHERE User_ID = %s')
-                cursor.execute(sql, int(session['id']))
+                cursor.execute(sql2, int(session['id']))
                 results = cursor.fetchone()
 
                 # 獲取資料庫數據
@@ -219,11 +246,66 @@ def nutrition_menu():
                         water = round(weight * 35, 0)
                         fat = round(weight * 0.8, 0)
                         cal = round(bmr * 1.375, 0)
-            return render_template('plan02-food.html', protein = protein, carbs = carbs, water = water, fat = fat, cal = cal)
+            return render_template('plan02-food.html', 
+                                   protein = protein, carbs = carbs, water = water, fat = fat, cal = cal, nutrient_data = nutrient_data)
         except Exception  as e:
             return str(e)
         finally:
             cursor.close()
+
+@app.route('/plan/nutrition/update', methods=['GET','POST'])
+def nutrition_update():
+    # 處理 JS 回傳值
+    # data = request.get_json()
+    # substance = data.get('nutrient')
+    # amount = data.get('amount')
+
+    today = date.today()
+    id = int(session.get('id'))
+
+    try:
+        conn = get_db_conn()
+        with conn.cursor() as cursor:
+            # 確認當天是否有數據
+            check_sql = ('SELECT * FROM nutrient_supplement_tracking '
+                         'WHERE User_ID = %s AND Date = %s')
+            cursor.execute(check_sql, (id, today))
+            record = cursor.fetchone()
+            if record:
+                record_exists = record[0]
+            else:
+                record_exists = 0
+            # 若沒有數據則插入全新數據
+            if record_exists == 0:
+                insert_sql = ('INSERT INTO nutrient_supplement_tracking (User_ID, Date, Pro, Carbs, Fat, Water, Cals) '
+                              'VALUES (%s, %s, 0, 0, 0, 0, 0)')
+                cursor.execute(insert_sql, (id, today))
+                conn.commit()
+
+            # 確認是否需要插入數據後取得值(只取前綴)
+            water = int(request.args.get('water').split()[0])
+            pro = int(request.args.get('pro').split()[0])
+            cals = int(request.args.get('cals').split()[0])
+            carbs = int(request.args.get('carbs').split()[0])
+            fat = int(request.args.get('fat').split()[0])
+            print(water)
+            # 更新紀錄
+            update_sql = ('UPDATE nutrient_supplement_tracking '
+                          'SET Water = %s, Pro = %s, Cals = %s, Carbs = %s, Fat = %s '
+                          'WHERE User_id = %s AND Date = %s')
+            cursor.execute(update_sql, (water, pro, cals, carbs, fat, id, today))
+            conn.commit()
+            # update_query = f"UPDATE `nutrients supplement tracking` SET {substance} = {substance} + %s WHERE User_id = %s AND Date = %s"
+            # cursor.execute(update_query, (amount, id, today))
+            # conn.commit()
+    
+        return render_template('updateSuccess.html')
+    except Exception as e:
+        return str(e)
+    finally:
+        cursor.close()
+
+    
 
 # 搜尋主頁面
 @app.route('/search')

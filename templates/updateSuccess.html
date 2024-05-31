@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>資料更新成功</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* 从center改为flex-start */
+            height: 100vh;
+            margin: 0;
+            padding-top: 100px; /* 添加顶部内边距 */
+        }
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 600px; /* 增加最大宽度 */
+        }
+        .container h1 {
+            color: #4c82af;
+            margin-bottom: 20px;
+        }
+        .container p {
+            font-size: 18px;
+            color: #555555;
+        }
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #4c87af;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #4577a0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>資料更新成功!</h1>
+        <p>您的數據已成功更新。</p>
+        <form action="/plan/nutrition" method="GET">
+            <button class="button">返回上頁</button>
+        </form>
+    </div>
+</body>
+</html>
