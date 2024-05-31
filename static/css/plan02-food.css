@@ -3,24 +3,27 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+    height: 70vh;
     margin: 0;
-    background-color: #f0f0f0;
+    background: linear-gradient(to right, #f5f7fa, #c3cfe2);
 }
 
 .header {
     text-align: center;
-    font-family:'Courier New';
-    font-size: 4em;
-    font-weight: bold;
-    color:#8E8E8E ;
-    margin:20px;
+    margin-bottom: 10px;
+}
+
+.headline {
+    text-align: center;
+    font-size: 6.5em;
+    font-family: 'Cursive', sans-serif;
+    text-shadow: #6aa6ff 5px 6px;
 }
 
 .back-button {
     position: absolute;
     top: 10px;
-    right: 25%;
+    left: 8%;
     background-color:#505252a9;
     border: none;
     cursor: pointer;
@@ -141,4 +144,5 @@ body {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin: 5px;
 }
