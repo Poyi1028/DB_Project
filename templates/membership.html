@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會員專區</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .header h1 {
+            margin: 0;
+            color: #1e90ff;
+        }
+        .member-info {
+            margin: 20px 0;
+        }
+        .member-info label {
+            display: block;
+            margin-bottom: 5px;
+            color: #1e90ff;
+        }
+        .member-info input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .buttons {
+            text-align: center;
+        }
+        .buttons button {
+            background-color: #1e90ff;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .buttons button:hover {
+            background-color: #1c86ee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>會員專區</h1>
+        </div>
+        <div class="member-info">
+            <label for="member-id">會員 ID</label>
+            <input type="text" id="member-id" value="12345" disabled>
+            
+            <label for="height">身高 (cm)</label>
+            <input type="text" id="height" value="170">
+            
+            <label for="weight">體重 (kg)</label>
+            <input type="text" id="weight" value="65">
+        </div>
+        <div class="buttons">
+            <button type="button" onclick="editInfo()">編輯資訊</button>
+            <button type="button" onclick="returnToHome()">返回主畫面</button>
+        </div>
+    </div>
+
+    <script>
+        function editInfo() {
+            alert('編輯功能尚未實現');
+        }
+
+        function returnToHome() {
+            window.location.href = ('/home');
+        }
+    </script>
+</body>
+</html>

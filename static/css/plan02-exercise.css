@@ -1,0 +1,98 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    background: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.headline {
+    font-size: 60px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #00796b;
+}
+
+.select-box {
+    margin: 15px 0;
+    font-size: 18px;
+    color: #004d40;
+}
+
+.select-box select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+.button-container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.tooltip-button {
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    color: #fff;
+    background-color: #00796b;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.tooltip-button svg {
+    width: 40px;
+    height: 40px;
+}
+
+.tooltip-button:hover {
+    background-color: #004d40;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip-button:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+.completion-text {
+    font-size: 35px;
+    color: #f9f9f9;
+    font-weight: bold;
+}

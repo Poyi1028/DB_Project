@@ -1,11 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorkoutRecord</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/workout_record.css" />
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
+        rel="stylesheet" />
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+
 </head>
+
 <body>
-    
+    <div class="head">
+        <h3>查詢健身紀錄</h3>
+    </div>
+    <div class="head">選擇日期：</div>
+    <div class="frame">
+        <div class="input-group date" id='date1'>
+            <input type="text" class="form-control" />
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-calendar"></i>
+            </span>
+        </div>
+        <div>
+            <button>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                </svg>
+            </button>
+        </div>
+    </div>
+    <h1>Exercise Record</h1>
+    <table id="exercise-table">
+        <thead>
+            <tr>
+                <th>器材</th>
+                <th>磅數</th>
+                <th>次數</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+        </tbody>
+    </table>
+
+    <script>
+        $('#date1').datetimepicker({
+            date: null, //一開始輸入框的日期為空
+            format: 'YYYY-MM-DD', //日期的顯示格式
+            locale: moment.locale('zh-tw'), //國別
+            //daysOfWeekDisabled: [0, 6], //隱藏的天數0為周日6為星期六
+            //minDate: moment().add(1,'days'), //顯示最小天數
+            //maxDate: moment().add(31,'days'), //顯示最大天數，30為最大的顯示範圍為一個月為限
+            //disabledDates:
+            //[ //隱藏的日期
+            //moment().add(1,'days'), //前一日
+            //moment().add(2,'days'), //前二日
+            //'2021-10-10', //特別日期
+            //'2021-12-25'
+            //]
+        });
+
+        const data = [
+            { "equipment": "Dumbbell", "weight": 20, "reps": 15 },
+            { "equipment": "Barbell", "weight": 50, "reps": 10 },
+            { "equipment": "Kettlebell", "weight": 10, "reps": 10 },
+            { "equipment": null, "weight": null, "reps": null },
+            { "equipment": null, "weight": null, "reps": null },
+            { "equipment": null, "weight": null, "reps": null },
+            { "equipment": null, "weight": null, "reps": null }
+        ];
+
+        function generateTable(data) {
+            const tableBody = document.getElementById('table-body');
+
+            data.forEach(item => {
+                const equipment = item.equipment;
+                const weight = item.weight;
+                const reps = item.reps;
+
+                // 检查如果这三项全部为空，则不生成该行
+                if (equipment || weight || reps) {
+                    const tr = document.createElement('tr');
+
+                    const equipmentCell = document.createElement('td');
+                    const weightCell = document.createElement('td');
+                    const repsCell = document.createElement('td');
+
+                    if (equipment) {
+                        equipmentCell.textContent = equipment;
+                        equipmentCell.classList.add('clickable');
+                        equipmentCell.addEventListener('click', () => {
+                            // 替换为你希望跳转的 URL，可以根据需要添加参数
+                            window.location.href = `equipment.html?equipment=${equipment}`;
+                        });
+                    } else {
+                        equipmentCell.textContent = '';
+                    }
+                    weightCell.textContent = weight || '';
+                    repsCell.textContent = reps || '';
+
+                    tr.appendChild(equipmentCell);
+                    tr.appendChild(weightCell);
+                    tr.appendChild(repsCell);
+
+                    tableBody.appendChild(tr);
+                }
+            });
+        }
+
+        // 调用函数生成表格
+        generateTable(data);
+    </script>
+
+
+
 </body>
+
 </html>

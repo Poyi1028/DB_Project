@@ -1,0 +1,7 @@
+INSERT INTO mydb.expertise (Name) VALUES ('背肌');
+INSERT INTO mydb.expertise (Name) VALUES ('腹肌');
+INSERT INTO mydb.expertise (Name) VALUES ('肩膀');
+INSERT INTO mydb.expertise (Name) VALUES ('二頭肌');
+INSERT INTO mydb.expertise (Name) VALUES ('三頭肌');
+INSERT INTO mydb.expertise (Name) VALUES ('腿部');
+INSERT INTO mydb.expertise (Name) VALUES ('臀部');

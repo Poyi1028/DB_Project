@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>登入頁面</title>
+    <link rel="stylesheet" href="/static/css/index.css">
+</head>
+
+<body>
+    <div class="header-container">
+        <h1>健人就是繳錢</h1>
+        <div class="button-container">
+            <button id="loginBtn">會員登入</button>
+            <button id="registerBtn">會員註冊</button>
+        </div>
+    </div>
+
+    <!-- 登入modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>登入</h2>
+            <form action="/home" method="post">
+                <label for="username">使用者ID</label>
+                <input type="text" id="user-id" name="login_ID" required>
+                <label for="password">密碼</label>
+                <input type="password" id="password" name="login_ps" required>
+                <button type="submit">登入</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 註冊modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>註冊</h2>
+            <form action="/register" method="post">
+                <label for="user-id">使用者ID</label>
+                <input type="text" id="user-id" name="regis_ID" required>
+                <label for="new-username">使用者名稱</label>
+                <input type="text" id="new-username" name="name" required>
+                <label for="new-password">密碼</label>
+                <input type="password" id="new-password" name="regis_ps" required>
+                <label for="confirm-password">確認密碼</label>
+                <input type="password" id="confirm-password" name="confirm_ps" required>
+                <div class="form-row">
+                    <div>
+                        <label for="gender">性別</label>
+                        <select id="gender" name="gender">
+                            <option value="">請選擇</option>
+                            <option value="male">男性</option>
+                            <option value="female">女性</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="height">身高(cm)</label>
+                        <input type="number" id="height" name="height" required>
+                    </div>
+                    <div>
+                        <label for="weight">體重(kg)</label>
+                        <input type="number" id="weight" name="weight" required>
+                    </div>
+                </div>
+                <button type="submit">註冊</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 註冊成功模態視窗 -->
+    <div id="registerSuccessModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>註冊成功</h2>
+            <p>恭喜您已成功註冊!</p>
+        </div>
+    </div>
+
+    <!-- 註冊失敗模態視窗 -->
+    <div id="registerFailModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>註冊失敗</h2>
+            <p>很抱歉,註冊過程中發生了錯誤,請稍後重試。</p>
+        </div>
+    </div>
+
+    <script src="/static/index.js"></script>
+</body>
+
+</html>

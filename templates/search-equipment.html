@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健身器材搜尋</title>
+    <link rel="stylesheet" href="/static/css/search-branch-layout.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="headline">健身器材</div>
+        <div class="search-section">
+            <div class="form-group">
+                <label for="gym-select">選擇健身房</label>
+                <select id="gym-select" class="form-control">
+                    <option value="政大健身房 NCCU Fitness">政大健身房 NCCU Fitness</option>
+                    <option value="Daily Fitness 運動日常">Daily Fitness 運動日常</option>
+                    <option value="Curves 可爾姿文山保儀店">Curves 可爾姿文山保儀店</option>
+                    <option value="真適能運動俱樂部">真適能運動俱樂部</option>
+                    <option value="有道 Fitness Way">有道 Fitness Way</option>
+                    <option value="臺北市文山運動中心">臺北市文山運動中心</option>
+                    <option value="MORE FIT 萬芳店">MORE FIT 萬芳店</option>
+                    <option value="運動學 FITOLOGY">運動學 FITOLOGY</option>
+                    <option value="焠齡運動空間 TrainingFit">焠齡運動空間 TrainingFit</option>
+                    <option value="世界健身俱樂部 新北新店店">世界健身俱樂部 新北新店店</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="body-part-select">選擇訓練部位</label>
+                <select id="body-part-select" class="form-control">
+                    <option value="胸肌">胸肌</option>
+                    <option value="背肌">背肌</option>
+                    <option value="腹肌">腹肌</option>
+                    <option value="肩膀">肩膀</option>
+                    <option value="二頭肌">二頭肌</option>
+                    <option value="三頭肌">三頭肌</option>
+                    <option value="腿部">腿部</option>
+                    <option value="臀部">臀部</option>
+                </select>
+            </div>
+            <button id="search-button" class="btn btn-primary mt-4" onclick="searchEquipment(this)">搜尋</button>
+        </div>
+        <div id="results-section" class="mt-5">
+            {% for equipment in equipments %}
+                <div class="result-card">
+                    <h4>{{equipment.get('Name')}}</h4>
+                    <p>器材： {{equipment.get('Name')}}</p>
+                    <p>訓練部位： {{equipment.get('Training_Area')}}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        function searchEquipment(element){
+            branch = document.getElementById("gym-select").value;
+            equipment = document.getElementById("body-part-select").value;
+
+
+            const urlParams = new URLSearchParams(window.location.search);
+
+            urlParams.set('branch', branch);
+
+            urlParams.set('equipment', equipment)
+            
+            window.location.search = urlParams;
+
+        }
+
+        window.onload = function() {
+            const branch = getParameterByName('branch');
+            const equipment = getParameterByName('equipment');
+            const resultsSection = document.getElementById('results-section');
+            
+            document.getElementById("gym-select").value = branch;
+            document.getElementById("body-part-select").value = equipment;
+        };
+
+    </script>
+
+</body>
+</html>
