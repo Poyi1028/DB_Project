@@ -6,6 +6,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url(/static/Homepage.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .header {
@@ -27,21 +32,12 @@ body {
     background-color: #4c98af;
 }
 
-.main-container {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1000px;
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
+.user-info-container {
+    width: 40%;
 }
 
-.user-info-container, .fitness-report-container {
-    width: 48%;
-}
-
-.user-info, .fitness-report {
-    background-color: #f2f2f2;
+.user-info {
+    background-color: #a4b7cb;
     padding: 20px;
     border-radius: 5px;
 }

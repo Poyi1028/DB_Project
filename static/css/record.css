@@ -84,7 +84,7 @@ body {
     justify-content: center;
     /* 垂直居中對齊 */
     cursor: pointer;
-    gap: 100px;
+    gap: 150px;
 }
 
 /* 設置按鈕樣式 */
@@ -100,25 +100,28 @@ body {
     width: 100%;
     /* 佔據容器寬度的30% */
     cursor: pointer;
-    border: 2px solid #000;
-    background-color: #bbb3e698;
+    border: 10px solid #aeadb1;
+    background-color: #bbb3e6af;
     /* 添加边框样式 */
     padding: 60px;
+
     /* 添加内边距使边框看起来更好 */
     border-radius: 20px;
     /* 可选：添加圆角 */
+    color: #3b3b3b;
 }
 
 .icon-button svg {
-    width: 25vh;
+    width: 35vh;
     /* 圖示寬度 */
-    height: 25vh;
+    height: 35vh;
     /* 圖示高度 */
 }
 
 .icon-button span {
-    font-size: 20px;
+    font-size: 30px;
     /* 文字大小 */
-    margin-top: 10px;
+    margin-top: 20px;
     /* 文字與圖示之間的間距 */
+    font-weight: bold;
 }

@@ -5,12 +5,7 @@
     <link rel="stylesheet" href="/static/css/member.css">
 </head>
 <body>
-    <!-- <form action="/home" method="get">
-        <div class="header">
-            <button class="home-btn">回首頁</button>
-        </div>
-    </form> -->
-    <div class="main-container">
+    <!-- <div class="main-container"> -->
         <div class="user-info-container">
             <form action="/member" method="POST">
                 <div class="user-info">
@@ -57,16 +52,7 @@
                 </div> 
             </form>
         </div>
-        <div class="fitness-report-container">
-            <div class="fitness-report">
-                <h2>健身報告</h2>
-                <img src="" alt="Fitness Report">
-                <div class="button-container">
-                    <button id="generateByn">生成報告</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- </div> -->
     <script>
         // 獲取後端傳遞的值
         const genderValue = '{{ gender }}';
