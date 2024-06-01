@@ -15,7 +15,30 @@ body {
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 22%;
+}
+
+.back-button {
+    /* position: absolute;
+    top: 10px;
+    left: 17%; */
+    position: relative;
+    background-color:#006779;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: #32403ede;
+    display: flex;
+    align-items: center;
+    margin: 2%;
+    padding: 5px;
+    color: aliceblue;
+    font-weight: bold;
+    border-radius: 7px;
+}
+
+.back-button svg {
+    margin-right: 5px;
 }
 
 .headline {
@@ -92,7 +115,7 @@ body {
 }
 
 .completion-text {
-    font-size: 35px;
+    font-size: 34px;
     color: #f9f9f9;
     font-weight: bold;
 }

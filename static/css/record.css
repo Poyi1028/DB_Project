@@ -1,20 +1,127 @@
-.icon-button{
-    display: flex; 
-    flex-direction: column; /* 將元素垂直排列 */
-    align-items: center; /* 水平居中對齊 */
-    justify-content: center; /* 垂直居中對齊 */
-    width: 100%; /* 佔據網頁寬度的90% */
+/* 設置 html 和 body 高度為 100% 以確保框架能夠覆蓋整個視口 */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    /* 背景颜色可根据需要调整 */
+}
+
+.back-button {
+    position: absolute;
+    top: 10px;
+    left: 2%;
+    background-color: #006779;
+    border: none;
     cursor: pointer;
+    font-size: 1.2em;
+    color: #32403ede;
+    display: flex;
+    align-items: center;
+    margin: 2%;
+    padding: 5px;
+    color: aliceblue;
+    font-weight: bold;
+    border-radius: 7px;
 }
-.icon-button svg {
-    width:25vh; /* 圖示寬度 */
-    height: 40vh; /* 圖示高度 */
+
+.back-button svg {
+    margin-right: 5px;
 }
-.icon-button span {
-    font-size: 20px; /* 文字大小 */
-    margin-top: 2px; /* 文字與圖示之間的間距 */
+
+/* 將框架置中在整個網頁 */
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(236, 237, 238);
 }
-.frame{
+
+
+.image-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.image {
+    position: absolute;
+    width: 35%;
+    height: 35%;
+    overflow: hidden;
+}
+
+.image img {
+    width: 100%;
+    height: 150%;
+
+    /* 保持图片比例并裁剪 */
+}
+
+.image-left-bottom {
+    bottom: 0;
+    left: 0;
+}
+
+.image-right-top {
+    bottom: 0;
+    right: 0;
+}
+
+/* 設置框架的高度和水平居中 */
+.frame {
     height: 50vh;
+    display: flex;
+    align-items: center;
+    /* 水平居中對齊 */
+    justify-content: center;
+    /* 垂直居中對齊 */
     cursor: pointer;
+    gap: 150px;
+}
+
+/* 設置按鈕樣式 */
+
+.icon-button {
+    display: flex;
+    flex-direction: column;
+    /* 將元素垂直排列 */
+    align-items: center;
+    /* 水平居中對齊 */
+    justify-content: center;
+    /* 垂直居中對齊 */
+    width: 100%;
+    /* 佔據容器寬度的30% */
+    cursor: pointer;
+    border: 10px solid #aeadb1;
+    background-color: #bbb3e6af;
+    /* 添加边框样式 */
+    padding: 60px;
+
+    /* 添加内边距使边框看起来更好 */
+    border-radius: 20px;
+    /* 可选：添加圆角 */
+    color: #3b3b3b;
+}
+
+.icon-button svg {
+    width: 35vh;
+    /* 圖示寬度 */
+    height: 35vh;
+    /* 圖示高度 */
+}
+
+.icon-button span {
+    font-size: 30px;
+    /* 文字大小 */
+    margin-top: 20px;
+    /* 文字與圖示之間的間距 */
+    font-weight: bold;
 }

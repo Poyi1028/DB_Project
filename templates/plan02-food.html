@@ -3,68 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>健康摄入</title>
+    <title>健康攝取</title>
     <link rel="stylesheet" href="/static/css/plan02-food.css">
 </head>
-<body>
+<body">
     <div class="header">
-        今天夠了嗎？
+        <div class="headline">NUTRITION LIST</div>
     </div>
+    <button onclick="back()" class="back-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+        </svg>
+        回上頁
+    </button>
     <div class="container">
-        <div class="row">
-            <div class="circle water">
-                <div class="content">
-                    <div class="name">水</div>
-                    <div class="amount">1.4 / 2.0 L</div>
+    <form action="/plan/nutrition/update" method="GET">
+        <!-- <div class="container"> -->
+            <div class="row">
+                <div class="circle water">
+                    <div class="content">
+                        <div class="name">水</div>
+                        <div class="amount">
+                            <input id="water-amount" name="water" value="{{ nutrient_data['water']|int }} / {{ water|int }} ml" style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;" readonly> 
+                        </div>                      
+                    </div>
+                    <button type="button" class="plus-button">+</button>
                 </div>
-                <button class="plus-button">+</button>
-            </div>
-            <div class="circle protein">
-                <div class="content">
-                    <div class="name">蛋白質</div>
-                    <div class="amount">50.0 / 100.0 g</div>
+                <div class="circle protein">
+                    <div class="content">
+                        <div class="name">蛋白質</div>
+                        <div class="amount">
+                            <input id="protein-amount" name="pro" style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;" value="{{ nutrient_data['protein']|int }} / {{ protein|int }} g" readonly>
+                        </div>
+                    </div>
+                    <button type="button" class="plus-button">+</button>
                 </div>
-                <button class="plus-button">+</button>
-            </div>
-            <div class="circle calories">
-                <div class="content">
-                    <div class="name">熱量</div>
-                    <div class="amount">200.0 / 2500.0 cal</div>
+                <div class="circle calories">
+                    <div class="content">
+                        <div class="name">熱量</div>
+                        <div class="amount">
+                            <input id="calories-amount" name="cals" style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;" value="{{ nutrient_data['calories']|int }} / {{ cal|int }} cal" readonly>
+                        </div>
+                    </div>
+                    <button type="button" class="plus-button">+</button>
                 </div>
-                <button class="plus-button">+</button>
             </div>
-        </div>
-        <div class="row">
-            <div class="circle vitA">
-                <div class="content">
-                    <div class="name">維生素A</div>
-                    <div class="amount">0.70 / 1.00 mg</div>
+            <div class="row">
+                <div class="circle carbs">
+                    <div class="content">
+                        <div class="name">碳水化合物</div>
+                        <div class="amount">
+                            <input id="carbs-amount" name="carbs" style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;" value="{{ nutrient_data['carbohydrate']|int }} / {{ carbs|int }} g" readonly>
+                        </div>               
+                    </div>
+                    <button type="button" class="plus-button">+</button>
                 </div>
-                <button class="plus-button">+</button>
-            </div>
-            <div class="circle vitD">
-                <div class="content">
-                    <div class="name">維生素D</div>
-                    <div class="amount">0.01 / 0.02 mg</div>
+                <div class="circle fat">
+                    <div class="content">
+                        <div class="name">脂肪</div>
+                        <div class="amount">
+                            <input id="fat-amount" name="fat" style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;" value="{{ nutrient_data['fat']|int }} / {{ fat|int }} g" readonly>
+                        </div>
+                    </div>
+                    <button type="button" class="plus-button">+</button>
                 </div>
-                <button class="plus-button">+</button>
             </div>
+        
+    
+        <div class="popup">
+            <select id="substance">
+                <option value="water">水</option>
+                <option value="protein">蛋白質</option>
+                <option value="calories">熱量</option>
+                <option value="carbs">碳水化合物</option>
+                <option value="fat">脂肪</option>
+            </select>
+            <textarea id="amount" placeholder="輸入攝取量"></textarea>
+            <button type="submit"  id="add-button">新增</button>
+            <!-- <button type="submit">新增完畢</button> -->
         </div>
     </div>
-
-    <div class="popup">
-        <select id="substance">
-            <option value="water">水</option>
-            <option value="protein">蛋白質</option>
-            <option value="calories">熱量</option>
-            <option value="vitA">維生素A</option>
-            <option value="vitD">維生素D</option>
-        </select>
-        <textarea id="amount" placeholder="输入摄取量"></textarea>
-        <button id="add-button">新增</button>
-    </div>
+    </form>
     
     <script>
+        function back() {
+            window.location.href = "/plan"
+        }
         document.addEventListener('DOMContentLoaded', function() {
             const plusButtons = document.querySelectorAll('.plus-button');
             const popup = document.querySelector('.popup');
@@ -81,22 +105,18 @@
 
             document.getElementById('add-button').addEventListener('click', () => {
                 const substance = substanceSelect.value;
-                const amount = parseFloat(amountInput.value);
+                const amount = parseInt(amountInput.value);
                 const circle = document.querySelector(`.circle.${substance}`);
-                const amountText = circle.querySelector('.amount').innerText;
-                const [currentAmount, totalAmountWithUnit] = amountText.split(' / ');
-                const totalAmount = parseFloat(totalAmountWithUnit.replace(/[^\d.]/g, ''));
-                const unit = totalAmountWithUnit.replace(/[0-9.]/g, '').trim(); // 获取单位
-                const newAmount = parseFloat(currentAmount) + amount;
-                
-                if (substance === 'vitA' || substance === 'vitD') {
-                    circle.querySelector('.amount').innerText = `${newAmount.toFixed(2)} / ${totalAmount.toFixed(2)} ${unit}`;
-                } else {
-                    circle.querySelector('.amount').innerText = `${newAmount.toFixed(1)} / ${totalAmount.toFixed(1)} ${unit}`;
-                }
-                
+                const input = document.getElementById(`${substance}-amount`);
+                const [currentAmount, totalAmountWithUnit] = input.value.split(' / ');
+                const totalAmount = parseInt(totalAmountWithUnit.replace(/[^\d]/g, ''));
+                const unit = totalAmountWithUnit.replace(/[\d]/g, '').trim();
+                const newAmount = parseInt(currentAmount) + amount;
+
+                input.value = `${newAmount} / ${totalAmount} ${unit}`;
+
                 popup.classList.remove('active');
-                amountInput.value = ''; // 清空输入框
+                amountInput.value = '';
             });
         });
     </script>

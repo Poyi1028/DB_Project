@@ -1,53 +1,117 @@
-body{
+body {
+    font-family: Arial, sans-serif;
     background-size: cover;
-}
-.frame{
-    display: flex; /*讓下一層次水平排列*/
-}
-
-.headline1{
-    text-align: left;
-    color: rgb(130, 139, 139,0.986);
-    padding-left: 5%;
-    margin-top: 2%;
-}
-.headline2{
-    text-align: left;
-    color: rgb(69, 71, 71);
-    padding-left: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #ceaceb, #7bafe4);
 }
 
-
-.choice{
-    margin-left: 23%;
-    font-size: 100px;
-    font-family:cursive;
-    text-shadow:#46A3FF 5px 5px;;
-}
-
-/* .btn{
-    margin-left: 92%;
+.ex-headline {
     text-align: center;
+    font-size: 4em;
+    font-family: 'Cursive', sans-serif;
+    color: #32403ede;
+    text-shadow: #6aa6ff 2px 3px;
+} 
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.back-button {
+    position: absolute;
+    top: 10px;
+    left: 2%;
+    background-color:#006779;
+    border: none;
     cursor: pointer;
-    font-size: 25px;
-} */
+    font-size: 1.2em;
+    color: #32403ede;
+    display: flex;
+    align-items: center;
+    margin: 2%;
+    padding: 5px;
+    color: aliceblue;
+    font-weight: bold;
+    border-radius: 7px;
+}
+
+.back-button svg {
+    margin-right: 5px;
+}
+
+.headline {
+    text-align: center;
+    font-size: 8em;
+    font-family: 'Cursive', sans-serif;
+    text-shadow: #6aa6ff 5px 6px;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+.section {
+    text-align: center;
+    background: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    height: 320px;
+    transition: transform 0.3s ease;
+}
+
+.section:hover {
+    transform: translateY(-10px);
+}
+
+.section-headline {
+    font-size: 28px;
+    font-weight: bold;
+    color: #00796b;
+    text-shadow: 2px 2px 4px #6aa6ff;
+    margin-bottom: 20px;
+}
+
+.button {
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    color: white;
+    background-color: #006779;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.button:hover {
+    background-color: #12afca;
+    transform: scale(1.1);
+}
 
 .tooltip-button {
+    display: inline-block;
+    position: relative;
     background-color: transparent;
     border: none;
     cursor: pointer;
-    position: relative;
-    margin-left: 80%;
 }
 
-.tooltip-button img {
-    width: 80px; /* 调整大小 */
-    height: 70px;
+.tooltip-button svg {
+    width: 80px;
+    height: 80px;
 }
 
 .tooltip-text {
     visibility: hidden;
-    width: 120px;
+    width: 140px;
     background-color: black;
     color: #fff;
     text-align: center;
@@ -55,9 +119,9 @@ body{
     padding: 5px 0;
     position: absolute;
     z-index: 1;
-    bottom: 125%; /* 将提示文字放置在按钮上方 */
+    bottom: -32%;
     left: 50%;
-    margin-left: -60px;
+    margin-left: -70px;
     opacity: 0;
     transition: opacity 0.3s;
 }

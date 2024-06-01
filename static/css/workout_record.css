@@ -61,44 +61,44 @@ button {
 }
 
 table {
-    width: 80%;
+    width: 70%;
     border-collapse: collapse;
     table-layout: fixed;
-    /* 固定表格布局，使列宽均匀 */
     box-shadow: 0 0 10px rgba(117, 117, 184, 0.877);
-    /* 蓝色阴影 */
     margin: 20px 0;
+    border-radius: 10px;
+    /* 修饰稜角 */
+    overflow: hidden;
+    /* 处理边框圆角问题 */
 }
 
 table,
 th,
 td {
     border: 1px solid #007bff;
-    /* 蓝色边框 */
+    text-align: center;
 }
 
 th,
 td {
     padding: 20px;
-    /* 调整填充 */
     text-align: center;
-    /* 文字居中 */
     font-size: 18px;
-    /* 放大字体 */
+    height: 60px;
+    /* 增加行高 */
+    vertical-align: middle;
+    /* 垂直居中 */
 }
 
 th {
-    background-color: #06315e;
-    /* 蓝色表头背景 */
+    background-color: #5381d1;
     color: white;
-    /* 白色表头文字 */
     font-size: 20px;
-    /* 放大表头字体 */
+    text-align: center;
 }
 
 tr:nth-child(even) {
     background-color: #e9f5ff;
-    /* 间隔行浅蓝色背景 */
 }
 
 .frame {
