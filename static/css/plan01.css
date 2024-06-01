@@ -5,6 +5,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(to right, #ceaceb, #7bafe4);
 }
 
 .ex-headline {
