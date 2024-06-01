@@ -1,157 +1,122 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <meta charset="utf-8"/>
-        <title>排行榜</title>
-        <link rel="stylesheet" type="text/css" href="/static/css/ranking-layout.css"/>
-    </head>
-    <body>
-       
-      <script>
-        function back() {
-          window.location.href = "/home";
-        }
-        function updateTableContent(buttonClicked) {
-        // 根據點擊的按鈕來決定要更新的內容
-        switch(buttonClicked.textContent) {
-            case "總時長":
-            // 更新表格內容為總時長相關內容
-            document.getElementById("type").textContent = "總時長";
-            break;
-            case "總頻率":
-            // 更新表格內容為總頻率相關內容
-            document.getElementById("type").textContent = "每週/次";
-            break;
-            case "項目1":
-            // 更新表格內容為項目1相關內容
-            document.getElementById("type").textContent = "重量(kg)";
-            break;
-            case "項目2":
-            // 更新表格內容為項目1相關內容
-            document.getElementById("type").textContent = "重量(kg)";
-            break;
-            case "項目3":
-            // 更新表格內容為項目1相關內容
-            document.getElementById("type").textContent = "重量(kg)";
-            break;
-            case "項目4":
-            // 更新表格內容為項目1相關內容
-            document.getElementById("type").textContent = "重量(kg)";
-            break;
-            case "項目5":
-            // 更新表格內容為項目1相關內容
-            document.getElementById("type").textContent = "重量(kg)";
-            break;
-            case "項目6":
-            // 更新表格內容為項目1相關內容
-            document.getElementById("type").textContent = "重量(kg)";
-            break;
-            default:
-            break;
-            }
-        }   
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <title>排行榜</title>
+  <link rel="stylesheet" type="text/css" href="/static/css/ranking-layout.css" />
+</head>
+
+<body>
+
+  <script>
+    function back() {
+      window.location.href = "/home";
+    }
+    function updateTableContent(buttonClicked) {
+      // 根據點擊的按鈕來決定要更新的內容
+      switch (buttonClicked.textContent) {
+        case "總時長":
+          // 更新表格內容為總時長相關內容
+          document.getElementById("type").textContent = "總時長";
+          break;
+        case "總頻率":
+          // 更新表格內容為總頻率相關內容
+          document.getElementById("type").textContent = "每週/次";
+          break;
+        case "項目1":
+          // 更新表格內容為項目1相關內容
+          document.getElementById("type").textContent = "重量(kg)";
+          break;
+        case "項目2":
+          // 更新表格內容為項目1相關內容
+          document.getElementById("type").textContent = "重量(kg)";
+          break;
+        case "項目3":
+          // 更新表格內容為項目1相關內容
+          document.getElementById("type").textContent = "重量(kg)";
+          break;
+        case "項目4":
+          // 更新表格內容為項目1相關內容
+          document.getElementById("type").textContent = "重量(kg)";
+          break;
+        case "項目5":
+          // 更新表格內容為項目1相關內容
+          document.getElementById("type").textContent = "重量(kg)";
+          break;
+        case "項目6":
+          // 更新表格內容為項目1相關內容
+          document.getElementById("type").textContent = "重量(kg)";
+          break;
+        default:
+          break;
+      }
+    }
 
 
-        function over(elem){
-            elem.style.backgroundColor="#BEBEBE";
-        }
-        function out(elem){
-            elem.style.backgroundColor='transparent';
-        }
-        function click(elem){
-            console.log(elem);
-            updateTableContent(elem);
-        }
-    </script>
-      
-      <div class="header">
-        <button onclick="back()" class="back-button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
-          </svg>
-          回上頁
-        </button>  
-        <div class="headline">RANKING LIST</div>
-      </div>
-        <hr/>
-    
-        <div class="frame">
-            <div class="right">
-                <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">總時長</div>
-                <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">總頻率</div>
-                <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">項目1</div>
-                <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">項目2</div>
-                <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">項目3</div>
-                <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">項目4</div>
-                <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">項目5</div>
-                <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">項目6</div>
-            </div>
-        </div>
-        <!--表格繪製-->
-        <div class="wrap" >
-            <table>
-              <tr>
-                <th>排名</th>
-                <th>姓名</th>
-                <th id="type">總時長</th>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>td</td>
-                <td>td</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>td</td>
-                <td>td</td>
-              </tr>
-                <tr>
-                <td>3</td>
-                <td>td</td>
-                <td>td</td>
-              </tr>
-                <tr>
-                <td>4</td>
-                <td>td</td>
-                <td>td</td>
-              </tr>
-                <tr>
-                <td>5</td>
-                <td>td</td>
-                <td>td</td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>td</td>
-                <td>td</td>
-              </tr>
-                <tr>
-                <td>7</td>
-                <td>td</td>
-                <td>td</td>
-              </tr>
-                <tr>
-                <td>8</td>
-                <td>td</td>
-                <td>td</td>
-              </tr>
-                <tr>
-                <td>9</td>
-                <td>td</td>
-                <td>td</td>
-              </tr>
-              <tr>
-                <td>10</td>
-                <td>td</td>
-                <td>td</td>
-              </tr>
-            </table>
-        </div>
+    function over(elem) {
+      elem.style.backgroundColor = "#BEBEBE";
+    }
+    function out(elem) {
+      elem.style.backgroundColor = 'transparent';
+    }
+    function click(elem) {
+      console.log(elem);
+      updateTableContent(elem);
+    }
+  </script>
 
-        <div  class="container">
-            <a href="file:///C:/Users/alex9/OneDrive/%E6%A1%8C%E9%9D%A2/Front_End/%E6%9C%9F%E6%9C%AB%E5%B0%88%E6%A1%88/timing.html" class="start_btn" >開始計時</a>
-        </div>
-        
-    </body>
+  <div class="header">
+    <button onclick="back()" class="back-button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+          d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+      </svg>
+      回上頁
+    </button>
+    <div class="headline">RANKING LIST</div>
+  </div>
+  <hr />
+
+  <div class="frame">
+    <div class="right">
+      <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">總時長</div>
+      <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">總頻率</div>
+      <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">項目1</div>
+      <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">項目2</div>
+      <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">項目3</div>
+      <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">項目4</div>
+      <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">項目5</div>
+      <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">項目6</div>
+    </div>
+  </div>
+  <!--表格繪製-->
+  <div class="wrap">
+    <table>
+      <tr>
+        <th>排名</th>
+        <th>姓名</th>
+        <th id="type">總時長</th>
+      </tr>
+      {% if results %}
+      {% for result in results %}
+      <tr>
+        <td>{{ result.Rank }}</td>
+        <td>{{ result.User }}</td>
+        <td>{{ result.Time }}</td>
+      </tr>
+      {% endfor %}
+      {% endif %}
+    </table>
+  </div>
+
+  <div class="container">
+    <a href="file:///C:/Users/alex9/OneDrive/%E6%A1%8C%E9%9D%A2/Front_End/%E6%9C%9F%E6%9C%AB%E5%B0%88%E6%A1%88/timing.html"
+      class="start_btn">開始計時</a>
+  </div>
+
+</body>
+
 </html>
