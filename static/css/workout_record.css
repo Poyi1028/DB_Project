@@ -8,6 +8,34 @@ body {
     /* 水平居中 */
     justify-content: center;
     /* 垂直居中 */
+    background-color: rgb(250, 229, 247) !important;
+}
+
+.top-right-image {
+    position: absolute;
+    top: 0px;
+    right: 30px;
+    width: 17%;
+    height: 30%;
+    object-fit: cover;
+    /* 確保圖片覆蓋整個容器 */
+}
+
+.top-left-image {
+    position: absolute;
+    top: 0px;
+    left: 30px;
+    width: 20%;
+    height: 35%;
+    object-fit: cover;
+    /* 確保圖片覆蓋整個容器 */
+}
+
+.headline {
+    text-align: center;
+    font-size: 7em;
+    font-family: 'Times New Roman', Times, serif;
+    text-shadow: #b0b0b1 5px 6px;
 }
 
 h1,
@@ -75,8 +103,9 @@ table {
 table,
 th,
 td {
-    border: 1px solid #007bff;
+    border: 1px solid #fa3098;
     text-align: center;
+    box-shadow: 0 0 10px rgba(117, 117, 184, 0.877) !important;
 }
 
 th,
@@ -91,7 +120,7 @@ td {
 }
 
 th {
-    background-color: #5381d1;
+    background-color: #ed75b3;
     color: white;
     font-size: 20px;
     text-align: center;

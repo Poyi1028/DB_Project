@@ -1,62 +1,65 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <meta charset="utf-8"/>
-        <title>排行榜</title>
-        <link rel="stylesheet" type="text/css" href="/static/css/ranking-layout.css"/>
-      <style>
-        body{
-          background-color: #ffdee9;
-          background-image: linear-gradient(180deg, #FFDEE9 0%, #B5FFFC 50%, #ffffff 100%);
-        }
-      </style>
-      </head>
-    <body>
-       
-      <script>
-        function back() {
-          window.location.href = "/home";
-        }
-        function updateTableContent(buttonClicked) {
-        // 根據點擊的按鈕來決定要更新的內容
-        switch(buttonClicked.textContent) {
-            case "總時長":
-            // 更新表格內容為總時長相關內容
-            document.getElementById("type").textContent = "總時長";
-            break;
-            case "總頻率":
-            // 更新表格內容為總頻率相關內容
-            document.getElementById("type").textContent = "每週/次";
-            break;
-            case "項目1":
-            // 更新表格內容為項目1相關內容
-            document.getElementById("type").textContent = "重量(kg)";
-            break;
-            case "項目2":
-            // 更新表格內容為項目1相關內容
-            document.getElementById("type").textContent = "重量(kg)";
-            break;
-            case "項目3":
-            // 更新表格內容為項目1相關內容
-            document.getElementById("type").textContent = "重量(kg)";
-            break;
-            case "項目4":
-            // 更新表格內容為項目1相關內容
-            document.getElementById("type").textContent = "重量(kg)";
-            break;
-            case "項目5":
-            // 更新表格內容為項目1相關內容
-            document.getElementById("type").textContent = "重量(kg)";
-            break;
-            case "項目6":
-            // 更新表格內容為項目1相關內容
-            document.getElementById("type").textContent = "重量(kg)";
-            break;
-            default:
-            break;
-            }
-        }   
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <title>排行榜</title>
+  <link rel="stylesheet" type="text/css" href="/static/css/ranking-layout.css" />
+  <style>
+    body {
+      background-color: #ffdee9;
+      background-image: linear-gradient(180deg, #FFDEE9 0%, #B5FFFC 50%, #ffffff 100%);
+      background-size: contain;
+    }
+  </style>
+</head>
+
+<body>
+
+  <script>
+    function back() {
+      window.location.href = "/home";
+    }
+    function updateTableContent(buttonClicked) {
+      // 根據點擊的按鈕來決定要更新的內容
+      switch (buttonClicked.textContent) {
+        case "總時長":
+          // 更新表格內容為總時長相關內容
+          document.getElementById("type").textContent = "總時長";
+          break;
+        case "總頻率":
+          // 更新表格內容為總頻率相關內容
+          document.getElementById("type").textContent = "每週/次";
+          break;
+        case "項目1":
+          // 更新表格內容為項目1相關內容
+          document.getElementById("type").textContent = "重量(kg)";
+          break;
+        case "項目2":
+          // 更新表格內容為項目1相關內容
+          document.getElementById("type").textContent = "重量(kg)";
+          break;
+        case "項目3":
+          // 更新表格內容為項目1相關內容
+          document.getElementById("type").textContent = "重量(kg)";
+          break;
+        case "項目4":
+          // 更新表格內容為項目1相關內容
+          document.getElementById("type").textContent = "重量(kg)";
+          break;
+        case "項目5":
+          // 更新表格內容為項目1相關內容
+          document.getElementById("type").textContent = "重量(kg)";
+          break;
+        case "項目6":
+          // 更新表格內容為項目1相關內容
+          document.getElementById("type").textContent = "重量(kg)";
+          break;
+        default:
+          break;
+      }
+    }
 
 
     function over(elem) {
@@ -116,9 +119,12 @@
     </table>
   </div>
 
-  <div  class="container">
-    <a href="timing.html" class="start_btn" >開始計時</a>
+  <div class="container">
+    <a href="timing.html" class="start_btn">開始計時</a>
+    <img src="/static/RANKING.png" alt="Description of image" class="bottom-right-image">
   </div>
-        
+
+
 </body>
+
 </html>

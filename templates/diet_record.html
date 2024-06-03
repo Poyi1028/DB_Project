@@ -17,8 +17,8 @@
 </head>
 
 <body>
-  <div class="head">
-    <h3>飲食攝取量</h3>
+  <div class="header">
+    <div class="headline">D I E T</div>
   </div>
   <div class="head">選擇日期：</div>
   <form action="/record/diet/search" method="POST">
@@ -40,56 +40,57 @@
       </div>
     </div>
   </form>
-  <h1>Nutrition Record</h1>
-  <div id="nutrition-table-container">
-    <table>
-      <tr>
-        <th class="left-column">總熱量(kcal)</th>
-        <td class="right-column">{{calary}}</td>
-      </tr>
-      <tr>
-        <th class="left-column">蛋白質(g)</th>
-        <td class="right-column">{{protein}}</td>
-      </tr>
-      <tr>
-        <th class="left-column">碳水化合物(g)</th>
-        <td class="right-column">{{carbon}}</td>
-      </tr>
-      <tr>
-        <th class="left-column">脂肪(g)</th>
-        <td class="right-column">{{fath}}</td>
-      </tr>
-      <tr>
-        <th class="left-column">水(ml)</th>
-        <td class="right-column">{{waterh}}</td>
-      </tr>
-    </table>
-  </div>
+  <div>
+    <div id="nutrition-table-container">
+      <table>
+        <tr>
+          <th class="left-column">總熱量(kcal)</th>
+          <td class="right-column">{{calary}}</td>
+        </tr>
+        <tr>
+          <th class="left-column">蛋白質(g)</th>
+          <td class="right-column">{{protein}}</td>
+        </tr>
+        <tr>
+          <th class="left-column">碳水化合物(g)</th>
+          <td class="right-column">{{carbon}}</td>
+        </tr>
+        <tr>
+          <th class="left-column">脂肪(g)</th>
+          <td class="right-column">{{fath}}</td>
+        </tr>
+        <tr>
+          <th class="left-column">水(ml)</th>
+          <td class="right-column">{{waterh}}</td>
+        </tr>
+      </table>
+    </div>
 
 
 
-  <script>
-    $('#date1').datetimepicker({
-      date: null, //一開始輸入框的日期為空
-      format: 'YYYY-MM-DD', //日期的顯示格式
-      locale: moment.locale('zh-tw'), //國別
-      //daysOfWeekDisabled: [0, 6], //隱藏的天數0為周日6為星期六
-      //minDate: moment().add(1,'days'), //顯示最小天數
-      //maxDate: moment().add(31,'days'), //顯示最大天數，30為最大的顯示範圍為一個月為限
-      //disabledDates:
-      //[ //隱藏的日期
-      //moment().add(1,'days'), //前一日
-      //moment().add(2,'days'), //前二日
-      //'2021-10-10', //特別日期
-      //'2021-12-25'
-      //]
-    });
+    <script>
+      $('#date1').datetimepicker({
+        date: null, //一開始輸入框的日期為空
+        format: 'YYYY-MM-DD', //日期的顯示格式
+        locale: moment.locale('zh-tw'), //國別
+        //daysOfWeekDisabled: [0, 6], //隱藏的天數0為周日6為星期六
+        //minDate: moment().add(1,'days'), //顯示最小天數
+        //maxDate: moment().add(31,'days'), //顯示最大天數，30為最大的顯示範圍為一個月為限
+        //disabledDates:
+        //[ //隱藏的日期
+        //moment().add(1,'days'), //前一日
+        //moment().add(2,'days'), //前二日
+        //'2021-10-10', //特別日期
+        //'2021-12-25'
+        //]
+      });
 
-    function Search() {
-      window.location.href = '/record/diet/search';
-    }
-  </script>
-
+      function Search() {
+        window.location.href = '/record/diet/search';
+      }
+    </script>
+    <img src="/static/toast.png" alt="Description of image" class="top-left-image">
+    <img src="/static/coffee.png" alt="Description of image" class="top-right-image">
 
 
 </body>
