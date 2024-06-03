@@ -37,7 +37,7 @@
   position: absolute;
   top: 10px;
   left: 2%;
-  background-color: #006779;
+  background-color: #7b90bc;
   border: none;
   cursor: pointer;
   font-size: 1.2em;
@@ -99,7 +99,7 @@
   text-align: center;
   border: rgba(54, 52, 52, 0.76);
   border-style: solid;
-  background-color: #58caca;
+  background-color: #7b90bc;
   font-size: 30px;
   border-radius: 5px;
   padding: 10px;
@@ -107,7 +107,7 @@
 
 .start_btn {
   border-radius: 12px;
-  background-color: #3D7878;
+  background-color: #7b90bc;
   text-align: center;
   cursor: pointer;
   border: none;
