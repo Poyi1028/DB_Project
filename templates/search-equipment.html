@@ -52,9 +52,9 @@
         <div id="results-section" class="mt-5">
             {% for equipment in equipments %}
                 <div class="result-card">
-                    <h4>{{equipment.get('Name')}}</h4>
-                    <p>器材： {{equipment.get('Name')}}</p>
-                    <p>訓練部位： {{equipment.get('Training_Area')}}</p>
+                    <h4>{{equipment.get('name')}}</h4>
+                    <p>器材： {{equipment.get('name')}}</p>
+                    <p>訓練部位： {{equipment.get('training_area')}}</p>
                 </div>
             {% endfor %}
         </div>
@@ -62,7 +62,7 @@
 
     <script>
         function back() {
-          window.location.href = "/";
+          window.location.href = "/search";
         }
 
         function getParameterByName(name, url) {

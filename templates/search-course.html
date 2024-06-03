@@ -50,9 +50,9 @@
         <div id="results-section" class="mt-5">
             {% for course in courses %}
                 <div class="result-card">
-                    <h4>{{course.get('Name')}}</h4>
-                    <p>時段： {{course.get('Time')}}</p>
-                    <p>授課老師： {{course.get('Teacher')}}</p>
+                    <h4>{{course.get('name')}}</h4>
+                    <p>時段： {{course.get('time')}}</p>
+                    <p>授課老師： {{course.get('teacher')}}</p>
                 </div>
             {% endfor %}
         </div>
@@ -60,7 +60,7 @@
     
     <script>
         function back() {
-          window.location.href = "/";
+          window.location.href = "/search";
         }
 
         function getParameterByName(name, url) {

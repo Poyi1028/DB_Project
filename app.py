@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import io
 import base64
 
+import pymysql.cursors
+
 app = Flask(__name__)
 app.secret_key = 'my secret key'
 
@@ -311,22 +313,106 @@ def search():
 # 健身房搜尋頁面
 @app.route('/search/gym')
 def gym():
-    return render_template('gym.html')
+    raw = open("templates\gym.html", "r", encoding="utf-8").read()
+    information = '<iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d115716.86798982904!2d121.51359254367352!3d24.99494630977675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1z5YGl6Lqr5oi_!5e0!3m2!1sen!2stw!4v1716196040209!5m2!1sen!2stw" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
+    return raw.replace("<?tag?>", information)
 
 # 器材搜尋頁面
 @app.route('/search/equipment')
 def equipment():
-    return render_template('search-equipment.html')
+    Name = request.args.get('branch')
+    Equipment = request.args.get('equipment')
+
+    if Name is None or Equipment is None:
+        return render_template('search-equipment.html', equipments = [])
+    
+    try:
+        conn = get_db_conn()
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+            # 取得健身房數據
+            sql = 'SELECT * FROM gym WHERE Name = %s'
+            cursor.execute(sql, (Name))
+            Gym_ID = [dict(gym) for gym in cursor.fetchall()][0]['Gym_ID']
+
+            # 取得 equipment 數據
+            sql = 'SELECT * FROM equipment WHERE Training_Area = %s AND Gym_ID = %s'
+            cursor.execute(sql, (Equipment, Gym_ID))
+            equipments = [dict(equipment) for equipment in cursor.fetchall()]
+
+            print(equipments)
+            # 若沒有數據
+            if equipments == []:
+                return render_template('search-equipment.html', equipments = [{'Name':'無符合條件的器材'}])
+            
+            return render_template('search-equipment.html', equipments = equipments)
+    except Exception as e:
+        return str(e)
+    finally:
+        cursor.close()
 
 # 教練搜尋頁面
 @app.route('/search/coach')
 def coach():
-    return render_template('search-coach.html')
+    name = request.args.get("branch")
+    expertise= request.args.get("expertise")
+
+    if name is None or expertise is None:
+        return render_template('search-coach.html', coaches=[])
+    
+    try:
+        conn = get_db_conn()
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+            # 獲取健身房數據
+            sql = 'SELECT * FROM gym WHERE Name = %s'
+            cursor.execute(sql, (name))
+            gym_id = [dict(gym) for gym in cursor.fetchall()][0]['Gym_ID']
+
+            # 獲取教練數據
+            sql = 'SELECT * FROM coach WHERE Expertise = %s AND Gym_ID = %s'
+            cursor.execute(sql, (expertise, gym_id))
+            coaches = [dict(coach) for coach in cursor.fetchall()]
+
+            # 若沒有教練
+            if coaches == []:
+                return render_template('search-coach.html', coaches = [{"Name":"無符合條件的教練"}])
+        
+        return render_template('search-coach.html', coaches = coaches)
+    except Exception as e:
+        return str(e)
+    finally:
+        cursor.close()
 
 # 課程搜尋頁面
 @app.route('/search/course')
 def course():
-    return render_template('search-course.html')
+    name = request.args.get("branch")
+    course = request.args.get("course")
+
+    if name is None or course is None:
+        return render_template('search-course.html', courses=[])
+    
+    try:
+        conn = get_db_conn()
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+            # 獲取健身房數據
+            sql = 'SELECT * FROM gym WHERE Name = %s'
+            cursor.execute(sql, (name))
+            gym_id = [dict(gym) for gym in cursor.fetchall()][0]['Gym_ID']
+
+            # 獲取課程數據
+            sql = 'SELECT * FROM course WHERE Name = %s AND Gym_ID = %s'
+            cursor.execute(sql, (course, gym_id))
+            courses = [dict(course) for course in cursor.fetchall()]
+
+            # 若沒有課程
+            if courses == []:
+                return render_template('search-course.html', courses = [{"Name":"無符合條件的課程"}])
+
+            return render_template('search-course.html', courses = courses)
+    except Exception as e:
+        return str(e)
+    finally:
+        cursor.close()
 
 # 會員專區頁面
 @app.route('/member', methods=['GET', 'POST'])

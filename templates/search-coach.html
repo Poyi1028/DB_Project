@@ -53,10 +53,10 @@
         <div id="results-section" class="mt-5">
             {% for coach in coaches %}
                 <div class="result-card">
-                    <h4>{{coach.get('Name')}}</h4>
-                    <p>專長： {{coach.get('Expertise')}}</p>
-                    <p>身高： {{coach.get('Height')}}</p>
-                    <p>體重： {{coach.get('Weight')}}</p>
+                    <h4>{{coach.get('name')}}</h4>
+                    <p>專長： {{coach.get('expertise')}}</p>
+                    <p>身高： {{coach.get('height')}}</p>
+                    <p>體重： {{coach.get('weight')}}</p>
 
                 </div>
             {% endfor %}
@@ -65,7 +65,7 @@
 
     <script>
         function back() {
-          window.location.href = "/";
+          window.location.href = "/search";
         }
 
         function getParameterByName(name, url) {
