@@ -6,6 +6,37 @@
   gap: 10px;
 }
 
+.top-right-image {
+  position: absolute;
+  top: 0px;
+  right: 150px;
+  width: 17%;
+  height: 30%;
+  object-fit: cover;
+  /* 確保圖片覆蓋整個容器 */
+}
+
+.top-left-image {
+  position: absolute;
+  top: 0px;
+  left: 150px;
+  width: 17%;
+  height: 30%;
+  object-fit: cover;
+  /* 確保圖片覆蓋整個容器 */
+}
+
+body {
+  background-color: rgb(246, 245, 210) !important;
+}
+
+.headline {
+  text-align: center;
+  font-size: 7em;
+  font-family: 'Times New Roman', Times, serif;
+  text-shadow: #b0b0b1 5px 6px;
+}
+
 .head {
   text-align: center;
   margin-bottom: 20px;
@@ -24,6 +55,7 @@
   /* 讓輸入框佔據剩餘空間 */
   margin-right: 5px;
   /* 給輸入框和圖標之間留一些間距 */
+  margin-bottom: 5px;
 }
 
 .input-group-addon {
@@ -40,9 +72,11 @@
   border: 1px solid #a9c6e6;
   border-radius: 4px;
   width: 200px;
+  margin-bottom: 5px;
 }
 
 table {
+  margin-top: 20px !important;
   width: 80%;
   /* 調整表格寬度 */
   margin: 0 auto;
@@ -52,10 +86,13 @@ table {
   /* 修饰稜角 */
   overflow: hidden;
   /* 处理边框圆角问题 */
+  box-shadow: 0 0 20px rgba(28, 25, 203, 0.877);
 }
 
 th,
 td {
+
+  margin-top: 5px;
   padding: 10px;
   text-align: left;
   border: 1px solid #ddd;
@@ -65,7 +102,7 @@ td {
 }
 
 th {
-  background-color: #a1bff3;
+  background-color: #f0bc7d;
   width: 40%;
   /* 調整左欄寬度 */
 
