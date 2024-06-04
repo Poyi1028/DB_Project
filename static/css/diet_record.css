@@ -26,6 +26,28 @@
   /* 確保圖片覆蓋整個容器 */
 }
 
+.back-button {
+  position: absolute;
+  top: 10px;
+  left: 2%;
+  background-color: #e28e3b;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  color: #32403ede;
+  display: flex;
+  align-items: center;
+  margin: 2%;
+  padding: 5px;
+  color: aliceblue;
+  font-weight: bold;
+  border-radius: 7px;
+}
+
+.back-button svg {
+  margin-right: 5px;
+}
+
 body {
   background-color: rgb(246, 245, 210) !important;
 }
@@ -34,7 +56,8 @@ body {
   text-align: center;
   font-size: 7em;
   font-family: 'Times New Roman', Times, serif;
-  text-shadow: #b0b0b1 5px 6px;
+  text-shadow: #c2a567 5px 6px;
+  color: #9e550d
 }
 
 .head {
@@ -86,7 +109,7 @@ table {
   /* 修饰稜角 */
   overflow: hidden;
   /* 处理边框圆角问题 */
-  box-shadow: 0 0 20px rgba(28, 25, 203, 0.877);
+  box-shadow: 0 0 20px rgba(184, 185, 157, 0.877);
 }
 
 th,

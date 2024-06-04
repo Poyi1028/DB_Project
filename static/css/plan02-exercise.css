@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #e0f7fa;
+    background-color: #d9fbf3;
     margin: 0;
     padding: 0;
     display: flex;
@@ -15,7 +15,7 @@ body {
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 22%;
+    width: 25%;
 }
 
 .back-button {
@@ -23,7 +23,7 @@ body {
     top: 10px;
     left: 17%; */
     position: relative;
-    background-color:#006779;
+    background-color: #006779;
     border: none;
     cursor: pointer;
     font-size: 1.2em;
@@ -42,10 +42,12 @@ body {
 }
 
 .headline {
-    font-size: 60px;
-    font-weight: bold;
     margin-bottom: 20px;
-    color: #00796b;
+    text-align: center;
+    font-size: 2.8em;
+    font-family: 'Times New Roman', Times, serif;
+    text-shadow: #83858d 3px 4px;
+    color: #01685c;
 }
 
 .select-box {

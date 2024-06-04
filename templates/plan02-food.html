@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,21 +12,26 @@
         <div class="headline">NUTRITION LIST</div>
     </div>
     <button onclick="back()" class="back-button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
         </svg>
         回上頁
     </button>
     <div class="container">
-    <form action="/plan/nutrition/update" method="GET">
-        <!-- <div class="container"> -->
+        <form action="/plan/nutrition/update" method="GET">
+            <!-- <div class="container"> -->
             <div class="row">
                 <div class="circle water">
                     <div class="content">
                         <div class="name">水</div>
                         <div class="amount">
-                            <input id="water-amount" name="water" value="{{ nutrient_data['water']|int }} / {{ water|int }} ml" style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;" readonly> 
-                        </div>                      
+                            <input id="water-amount" name="water"
+                                value="{{ nutrient_data['water']|int }} / {{ water|int }} ml"
+                                style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;"
+                                readonly>
+                        </div>
                     </div>
                     <button type="button" class="plus-button">+</button>
                 </div>
@@ -33,7 +39,9 @@
                     <div class="content">
                         <div class="name">蛋白質</div>
                         <div class="amount">
-                            <input id="protein-amount" name="pro" style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;" value="{{ nutrient_data['protein']|int }} / {{ protein|int }} g" readonly>
+                            <input id="protein-amount" name="pro"
+                                style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;"
+                                value="{{ nutrient_data['protein']|int }} / {{ protein|int }} g" readonly>
                         </div>
                     </div>
                     <button type="button" class="plus-button">+</button>
@@ -42,7 +50,9 @@
                     <div class="content">
                         <div class="name">熱量</div>
                         <div class="amount">
-                            <input id="calories-amount" name="cals" style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;" value="{{ nutrient_data['calories']|int }} / {{ cal|int }} cal" readonly>
+                            <input id="calories-amount" name="cals"
+                                style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;"
+                                value="{{ nutrient_data['calories']|int }} / {{ cal|int }} cal" readonly>
                         </div>
                     </div>
                     <button type="button" class="plus-button">+</button>
@@ -53,8 +63,10 @@
                     <div class="content">
                         <div class="name">碳水化合物</div>
                         <div class="amount">
-                            <input id="carbs-amount" name="carbs" style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;" value="{{ nutrient_data['carbohydrate']|int }} / {{ carbs|int }} g" readonly>
-                        </div>               
+                            <input id="carbs-amount" name="carbs"
+                                style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;"
+                                value="{{ nutrient_data['carbohydrate']|int }} / {{ carbs|int }} g" readonly>
+                        </div>
                     </div>
                     <button type="button" class="plus-button">+</button>
                 </div>
@@ -62,34 +74,36 @@
                     <div class="content">
                         <div class="name">脂肪</div>
                         <div class="amount">
-                            <input id="fat-amount" name="fat" style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;" value="{{ nutrient_data['fat']|int }} / {{ fat|int }} g" readonly>
+                            <input id="fat-amount" name="fat"
+                                style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;"
+                                value="{{ nutrient_data['fat']|int }} / {{ fat|int }} g" readonly>
                         </div>
                     </div>
                     <button type="button" class="plus-button">+</button>
                 </div>
             </div>
-        
-    
-        <div class="popup">
-            <select id="substance">
-                <option value="water">水</option>
-                <option value="protein">蛋白質</option>
-                <option value="calories">熱量</option>
-                <option value="carbs">碳水化合物</option>
-                <option value="fat">脂肪</option>
-            </select>
-            <textarea id="amount" placeholder="輸入攝取量"></textarea>
-            <button type="submit"  id="add-button">新增</button>
-            <!-- <button type="submit">新增完畢</button> -->
-        </div>
+
+
+            <div class="popup">
+                <select id="substance">
+                    <option value="water">水</option>
+                    <option value="protein">蛋白質</option>
+                    <option value="calories">熱量</option>
+                    <option value="carbs">碳水化合物</option>
+                    <option value="fat">脂肪</option>
+                </select>
+                <textarea id="amount" placeholder="輸入攝取量"></textarea>
+                <button type="submit" id="add-button">新增</button>
+                <!-- <button type="submit">新增完畢</button> -->
+            </div>
     </div>
     </form>
-    
+
     <script>
         function back() {
             window.location.href = "/plan"
         }
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const plusButtons = document.querySelectorAll('.plus-button');
             const popup = document.querySelector('.popup');
             const substanceSelect = document.getElementById('substance');
@@ -120,5 +134,6 @@
             });
         });
     </script>
-</body>
+    </body>
+
 </html>
