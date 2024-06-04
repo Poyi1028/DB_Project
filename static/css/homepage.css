@@ -38,6 +38,10 @@
     background-color: white;
 }
 
+span {
+    font-family: 'Times New Roman', Times, serif;
+}
+
 .icon-button svg {
     width: 15vh;
     /* 圖示寬度 */
@@ -46,7 +50,8 @@
 }
 
 .icon-button span {
-    font-size: 14px;
+    font-size: 17px;
+    font-family: 'Times New Roman', Times, serif;
     /* 文字大小 */
     margin-top: 4px;
     /* 文字與圖示之間的間距 */
