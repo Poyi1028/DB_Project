@@ -23,47 +23,6 @@
     function back() {
       window.location.href = "/home";
     }
-    function updateTableContent(buttonClicked) {
-      // 根據點擊的按鈕來決定要更新的內容
-      switch (buttonClicked.textContent) {
-        case "總時長":
-          // 更新表格內容為總時長相關內容
-          document.getElementById("type").textContent = "總時長";
-          break;
-        case "總頻率":
-          // 更新表格內容為總頻率相關內容
-          document.getElementById("type").textContent = "每週/次";
-          break;
-        case "項目1":
-          // 更新表格內容為項目1相關內容
-          document.getElementById("type").textContent = "重量(kg)";
-          break;
-        case "項目2":
-          // 更新表格內容為項目1相關內容
-          document.getElementById("type").textContent = "重量(kg)";
-          break;
-        case "項目3":
-          // 更新表格內容為項目1相關內容
-          document.getElementById("type").textContent = "重量(kg)";
-          break;
-        case "項目4":
-          // 更新表格內容為項目1相關內容
-          document.getElementById("type").textContent = "重量(kg)";
-          break;
-        case "項目5":
-          // 更新表格內容為項目1相關內容
-          document.getElementById("type").textContent = "重量(kg)";
-          break;
-        case "項目6":
-          // 更新表格內容為項目1相關內容
-          document.getElementById("type").textContent = "重量(kg)";
-          break;
-        default:
-          break;
-      }
-    }
-
-
     function over(elem) {
       elem.style.backgroundColor = "#BEBEBE";
     }
@@ -89,18 +48,6 @@
   </div>
   <hr />
 
-  <div class="frame">
-    <div class="right">
-      <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">總時長</div>
-      <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">總頻率</div>
-      <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">項目1</div>
-      <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">項目2</div>
-      <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">項目3</div>
-      <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">項目4</div>
-      <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">項目5</div>
-      <div class="btn" onmouseover="over(this)" onmouseout="out(this)" onclick="click(this)">項目6</div>
-    </div>
-  </div>
   <!--表格繪製-->
   <div class="wrap">
     <table>
@@ -122,7 +69,7 @@
   </div>
 
   <div class="container">
-    <a href="timing.html" class="start_btn">開始計時</a>
+    <a href="/gypt/timing" class="start_btn">開始計時</a>
   </div>
   <img src="/static/RANKING.png" alt="Description of image" class="bottom-right-image">
 

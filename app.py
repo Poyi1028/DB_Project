@@ -1,9 +1,6 @@
 from flask import Flask, redirect, request, render_template, session, jsonify
 import pymysql
-from datetime import date
-import matplotlib.pyplot as plt
-import io
-import base64
+from datetime import date, datetime
 
 import pymysql.cursors
 
@@ -109,7 +106,7 @@ def diet_record_search():
         conn = get_db_conn()
         with conn.cursor() as cursor:
             # 從所選的日期、預存取的 ID 找出飲食紀錄的 relation
-            sql = ('SELECT Calaries_Intake, Protein_intake, Carbonhydrate_Intake, Fat_Intake, Water_Intake '
+            sql = ('SELECT Cals, Pro, Carbs, Fat, Water '
                    'FROM nutrient_supplement_tracking '
                    'WHERE Date = %s AND User_ID = %s')
             cursor.execute(sql, (int(Date), int(session['id'])))
@@ -144,7 +141,7 @@ def workout_record_search():
             conn = get_db_conn()
             with conn.cursor() as cursor:
                 # 從所選日期和 ID 透過 Join 找出符合的數據
-                sql = ("SELECT Equipment_Name, Object, Training_Area, Training_Detail, Weight, `Set` "
+                sql = ("SELECT Name, Object, plan.Training_Area, Training_Detail, Weight, `Set` "
                        "FROM exercise_plan as plan LEFT JOIN equipment as e "
                        "ON plan.Equipment_ID = e.Equipment_ID "
                        "WHERE Status = 'Done' "
@@ -210,8 +207,7 @@ def nutrition_menu():
                 nutrient_data['water'] = float(result_dict['water'])
                 nutrient_data['protein'] = float(result_dict['protein'])
                 nutrient_data['calories'] = float(result_dict['calories'])
-                nutrient_data['carbohydrate'] = float(
-                    result_dict['carbonhydrate'])
+                nutrient_data['carbohydrate'] = float(result_dict['carbonhydrate'])
                 nutrient_data['fat'] = float(result_dict['fat'])
 
             # 先讀取使用者的身高、體重、性別、健身目標、年齡
@@ -476,6 +472,7 @@ def gypt():
                     '    from gypt_start as s join gypt_finish as f '
                     '    on s.User_ID = f.User_ID '
                     '    and date(start) = date(finish) '
+                    '    and s.ID = f.ID '
                     '    join user on s.user_id = user.User_ID'
                     ') as everyday '
                     'group by name '
@@ -491,24 +488,71 @@ def gypt():
         cursor.close()
     return render_template('ranking-list.html', results = results)
 
+# GYPT 計時頁面
+@app.route('/gypt/timing')
+def timing():
+    ts = datetime.now().strftime('%Y%m%d%H%M%S')
+    try:
+        conn = get_db_conn()
+        with conn.cursor() as cursor:
+            # 插入開始的時間戳記
+            sql = ('INSERT INTO gypt_start (User_ID, Start)'
+                   'VALUES (%s, %s)')
+            cursor.execute(sql, (int(session['id']), ts))
+            conn.commit()
+
+            # 更新使用者狀態為 ing
+            sql = "UPDATE user SET Status = 'ing' WHERE User_ID = %s"
+            cursor.execute(sql, (int(session['id'])))
+            conn.commit()
+
+            # 檢查有誰正在健身
+            sql = "SELECT Name FROM user WHERE Status = 'ing' AND User_ID <> %s"
+            cursor.execute(sql, (int(session['id'])))
+            results = cursor.fetchall()
+
+            if results:
+                results = [{'Rank': index + 1, 'User': r[0]} for index, r in enumerate(results[:5])]
+    except Exception as e:
+        return str(e)
+    finally:
+        cursor.close()
+    return render_template('timing.html', results=results)
+
 # GYPT 訓練時長結果頁面
 @app.route('/gypt/timing/result')
 def gypt_result():
-    # try:
-    #     conn = get_db_conn()
-    #     with conn.cursor() as cursor:
-    #         # 將資料庫中的時間戳記相減獲得訓練時長
-    #         time_sql = ('SELECT TIMESTAMPDIFF(MINUTE, MIN(Work_Time), MAX(Work_Time)) AS t '
-    #                     'FROM ( SELECT Work_Time FROM gypt WHERE User_ID = %s ORDER BY Work_Time DESC LIMIT 2) '
-    #                     'AS record;')
-    #         cursor.execute(time_sql, (int(session['id'])))
-    #         # 獲取結果
-    #         result = cursor.fetchone()
-    # except Exception as e:
-    #     return str(e)
-    # finally:
-    #     cursor.close()
-    return render_template('ranking-list.html')
+    ts = datetime.now().strftime('%Y%m%d%H%M%S')
+    try:
+        conn = get_db_conn()
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+            # 將 User Status 更新為 'no'
+            sql = "UPDATE user SET Status = 'no' WHERE User_ID = %s"
+            cursor.execute(sql, (int(session['id'])))
+            conn.commit()
+
+            # 插入結束時間
+            sql = ('INSERT INTO gypt_finish (User_ID, Finish)'
+                   'VALUES (%s, %s)')
+            cursor.execute(sql, (int(session['id']), ts))
+            conn.commit()
+
+            # 將最新的一次數據取出
+            time_sql = ('SELECT timestampdiff(minute, `start`, `finish`) as t '
+                        'FROM gypt_start AS s JOIN gypt_finish AS f '
+                        'ON s.User_ID = f.User_ID '
+                        'AND date(start) = date(finish) '
+                        'AND s.ID = f.ID '
+                        'ORDER BY f.ID desc')
+            cursor.execute(time_sql)
+            # 獲取結果
+            result = cursor.fetchone()
+            time = result['t'] if result else None
+    except Exception as e:
+        return str(e)
+    finally:
+        cursor.close()
+    return render_template('timing_result.html', time = time)
 
 # 介紹頁面
 @app.route('/intro')
