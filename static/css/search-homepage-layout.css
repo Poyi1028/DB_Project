@@ -29,11 +29,7 @@ body {
   }
 .bottom-right-image {
     position: absolute;
-<<<<<<< HEAD
     top: 0px;
-=======
-    top: 25px;
->>>>>>> f86dee243af819f52f9f7250bf602aa2d1e4344b
     right: 0;
     width: 29%;
     height: 29%;
