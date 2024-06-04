@@ -12,13 +12,9 @@
   <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>
   <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
-
-
 </head>
 
 <body>
-
-
   </div>
   <div class="header">
     <button onclick="back()" class="back-button">
@@ -77,30 +73,18 @@
       </table>
     </div>
 
-
-
     <script>
       $('#date1').datetimepicker({
         date: null, //一開始輸入框的日期為空
         format: 'YYYY-MM-DD', //日期的顯示格式
         locale: moment.locale('zh-tw'), //國別
-        //daysOfWeekDisabled: [0, 6], //隱藏的天數0為周日6為星期六
-        //minDate: moment().add(1,'days'), //顯示最小天數
-        //maxDate: moment().add(31,'days'), //顯示最大天數，30為最大的顯示範圍為一個月為限
-        //disabledDates:
-        //[ //隱藏的日期
-        //moment().add(1,'days'), //前一日
-        //moment().add(2,'days'), //前二日
-        //'2021-10-10', //特別日期
-        //'2021-12-25'
-        //]
       });
 
       function Search() {
         window.location.href = '/record/diet/search';
       }
       function back() {
-        window.location.href = "/home";
+        window.location.href = "/record";
       }
     </script>
     <img src="/static/toast.png" alt="Description of image" class="top-left-image">
