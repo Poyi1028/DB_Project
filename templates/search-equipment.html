@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +8,15 @@
     <link rel="stylesheet" href="/static/css/search-branch-layout.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="container">
-        <div class="headline">健身器材</div>
+        <div class="headline">E Q U I P M E N T</div>
         <button class="back-button" onclick="back()">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left"
-              viewBox="0 0 16 16">
-              <path fill-rule="evenodd"
-                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
             </svg>
             回上頁
         </button>
@@ -51,18 +53,18 @@
         </div>
         <div id="results-section" class="mt-5">
             {% for equipment in equipments %}
-                <div class="result-card">
-                    <h4>{{equipment.get('name')}}</h4>
-                    <p>器材： {{equipment.get('name')}}</p>
-                    <p>訓練部位： {{equipment.get('training_area')}}</p>
-                </div>
+            <div class="result-card">
+                <h4>{{equipment.get('name')}}</h4>
+                <p>器材： {{equipment.get('name')}}</p>
+                <p>訓練部位： {{equipment.get('training_area')}}</p>
+            </div>
             {% endfor %}
         </div>
     </div>
 
     <script>
         function back() {
-          window.location.href = "/search";
+            window.location.href = "/search";
         }
 
         function getParameterByName(name, url) {
@@ -75,7 +77,7 @@
             return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
 
-        function searchEquipment(element){
+        function searchEquipment(element) {
             branch = document.getElementById("gym-select").value;
             equipment = document.getElementById("body-part-select").value;
 
@@ -85,16 +87,16 @@
             urlParams.set('branch', branch);
 
             urlParams.set('equipment', equipment)
-            
+
             window.location.search = urlParams;
 
         }
 
-        window.onload = function() {
+        window.onload = function () {
             const branch = getParameterByName('branch');
             const equipment = getParameterByName('equipment');
             const resultsSection = document.getElementById('results-section');
-            
+
             document.getElementById("gym-select").value = branch;
             document.getElementById("body-part-select").value = equipment;
         };
@@ -102,4 +104,5 @@
     </script>
 
 </body>
+
 </html>

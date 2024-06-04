@@ -2,8 +2,8 @@
   position: fixed;
   bottom: 0;
   right: 0;
-  width: 30%;
-  height: 30%;
+  width: 25%;
+  height: 35%;
   object-fit: cover;
   /* 確保圖片覆蓋整個容器 */
 }

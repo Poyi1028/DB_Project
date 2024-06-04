@@ -1,8 +1,16 @@
 body {
-    background: linear-gradient(to right, #f5f7fa, #c3cfe2);
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: rgba(212, 229, 240, 0.87) !important;
+}
+
+.headline {
+    text-align: center;
+    font-size: 8em;
+    font-family: 'Times New Roman', Times, serif;
+    text-shadow: #83858d 5px 6px;
+    color: #465d90;
 }
 
 .container {
@@ -16,11 +24,12 @@ body {
     margin-bottom: 30px;
     font-weight: bold;
 }
+
 .back-button {
     position: absolute;
     top: 10px;
     left: 2%;
-    background-color:#006779;
+    background-color: #6680b9;
     border: none;
     cursor: pointer;
     font-size: 1.2em;
@@ -32,11 +41,11 @@ body {
     color: aliceblue;
     font-weight: bold;
     border-radius: 7px;
-    }
-    
-    .back-button svg {
+}
+
+.back-button svg {
     margin-right: 5px;
-    }
+}
 
 .search-section {
     display: flex;
