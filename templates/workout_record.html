@@ -18,6 +18,14 @@
 
 <body>
     <div class="header">
+        <button onclick="back()" class="back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+            </svg>
+            回上頁
+        </button>
         <div class="headline">W O R K O U T</div>
     </div>
 
@@ -80,13 +88,16 @@
             format: 'YYYY-MM-DD', //日期的顯示格式
             locale: moment.locale('zh-tw'), //國別
         });
-
+        function back() {
+            window.location.href = "/home";
+        }
 
     </script>
 
 
     <img src="/static/loopy.png" alt="Description of image" class="top-left-image">
     <img src="/static/cabi.png" alt="Description of image" class="top-right-image">
+
 </body>
 
 </html>

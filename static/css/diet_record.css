@@ -26,6 +26,28 @@
   /* 確保圖片覆蓋整個容器 */
 }
 
+.back-button {
+  position: absolute;
+  top: 10px;
+  left: 2%;
+  background-color: #e28e3b;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  color: #32403ede;
+  display: flex;
+  align-items: center;
+  margin: 2%;
+  padding: 5px;
+  color: aliceblue;
+  font-weight: bold;
+  border-radius: 7px;
+}
+
+.back-button svg {
+  margin-right: 5px;
+}
+
 body {
   background-color: rgb(246, 245, 210) !important;
 }
