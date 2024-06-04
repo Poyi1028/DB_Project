@@ -86,7 +86,7 @@ table {
   /* 修饰稜角 */
   overflow: hidden;
   /* 处理边框圆角问题 */
-  box-shadow: 0 0 20px rgba(28, 25, 203, 0.877);
+  box-shadow: 0 0 20px rgba(184, 185, 157, 0.877);
 }
 
 th,

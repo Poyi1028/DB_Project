@@ -14,6 +14,19 @@ html {
     ;
 }
 
+
+
+.headline {
+    position: fixed;
+    left: 400px;
+    top: 0;
+    text-align: center;
+    font-size: 6em;
+    font-family: 'Times New Roman', Times, serif;
+    text-shadow: #83858d 3px 4px;
+    color: #3a1b54;
+}
+
 .bottom-center-image {
     position: absolute;
     bottom: 0px;
@@ -54,36 +67,9 @@ body {
     background-color: rgb(236, 237, 238);
 }
 
-
-
-
-.image {
-    position: absolute;
-    width: 35%;
-    height: 35%;
-    overflow: hidden;
-}
-
-.image img {
-    width: 100%;
-    height: 150%;
-
-    /* 保持图片比例并裁剪 */
-}
-
-.image-left-bottom {
-    bottom: 0;
-    left: 0;
-}
-
-.image-right-top {
-    bottom: 0;
-    right: 0;
-}
-
 /* 設置框架的高度和水平居中 */
 .frame {
-    height: 50vh;
+    height: 30vh;
     display: flex;
     align-items: center;
     /* 水平居中對齊 */
@@ -107,10 +93,9 @@ body {
     /* 佔據容器寬度的30% */
     cursor: pointer;
     border: 10px solid #aeadb1;
-    background-color: #bbb3e6af;
+    background-color: #c4bee9da;
     /* 添加边框样式 */
     padding: 60px;
-
     /* 添加内边距使边框看起来更好 */
     border-radius: 20px;
     /* 可选：添加圆角 */
@@ -118,9 +103,9 @@ body {
 }
 
 .icon-button svg {
-    width: 35vh;
+    width: 30vh;
     /* 圖示寬度 */
-    height: 35vh;
+    height: 30vh;
     /* 圖示高度 */
 }
 

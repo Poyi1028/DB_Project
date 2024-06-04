@@ -8,7 +8,8 @@
   /* 確保圖片覆蓋整個容器 */
 }
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -70,9 +71,10 @@ html, body {
 
 .headline {
   text-align: center;
-  font-size: 8em;
+  font-size: 7em;
   font-family: 'Times New Roman', Times, serif;
-  text-shadow: #a3a4a7 5px 6px;
+  text-shadow: #83858d 5px 6px;
+  color: #51699c;
 }
 
 .container {
@@ -105,10 +107,11 @@ html, body {
   text-align: center;
   border: rgba(54, 52, 52, 0.76);
   border-style: solid;
-  background-color: #7b90bc;
+  background-color: #7a95ca;
   font-size: 30px;
   border-radius: 5px;
   padding: 10px;
+  color: darkblue
 }
 
 .start_btn {
