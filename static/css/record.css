@@ -6,8 +6,6 @@ html {
     height: 100%;
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: #ffffff;
     /* 背景颜色可根据需要调整 */
     background-image: url('/static/record.jpg');
@@ -24,6 +22,7 @@ html {
     font-family: 'Times New Roman', Times, serif;
     text-shadow: #83858d 3px 4px;
     color: #3a1b54;
+    margin-top: 10px;
 }
 
 .bottom-center-image {
@@ -61,7 +60,6 @@ html {
 /* 將框架置中在整個網頁 */
 body {
     display: flex;
-    align-items: center;
     justify-content: center;
     background-color: rgb(236, 237, 238);
 }
@@ -76,6 +74,7 @@ body {
     /* 垂直居中對齊 */
     cursor: pointer;
     gap: 150px;
+    margin-top: 12em;
 }
 
 /* 設置按鈕樣式 */

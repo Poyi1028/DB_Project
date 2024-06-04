@@ -54,6 +54,7 @@
         <div id="results-section" class="mt-5">
             {% for coach in coaches %}
             <div class="result-card">
+                <img src="{{ coach.get('image_url') }}" alt="{{ coach.get('Name') }}" style="width:100px; height:100px;">
                 <h4>{{coach.get('name')}}</h4>
                 <p>專長： {{coach.get('expertise')}}</p>
                 <p>身高： {{coach.get('height')}}</p>
