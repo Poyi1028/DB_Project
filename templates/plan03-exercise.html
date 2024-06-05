@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="header">
-        <button onclick="history.back()" class="back-button">
+        <button onclick="back()" class="back-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
             </svg>
@@ -39,6 +39,8 @@
                                     <td>
                                         <input type="number" value="{{ exercise.set_value }}" class="times-input">
                                     </td>
+                                    <td style="display:none;" class="exercise-status">{{ exercise.status }}</td> <!-- 隱藏狀態信息 -->
+                                    <td style="display:none;" class="exercise-status">{{ exercise.plan_id }}</td> <!-- 隱藏狀態信息 -->
                                 </tr>
                             {% endfor %}
                         {% else %}
@@ -55,6 +57,23 @@
         {% endfor %}
     </div>
     <script>
+        function back() {
+            window.location.href = "/plan";
+        }
+        // 初始化按钮状态
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const statuses = [];
+            document.querySelectorAll('.exercise-status').forEach(statusElement => {
+                statuses.push(statusElement.textContent.trim());
+            });
+            
+            const button = document.querySelector('.status-button');
+            if (statuses.includes('Done')) {
+                button.classList.add('completed');
+                button.textContent = '已完成';
+            }
+        });
+
         document.querySelectorAll('.status-button').forEach(button => {
             button.addEventListener('click', function() {
                 if (button.classList.contains('completed')) {
@@ -63,6 +82,30 @@
                 } else {
                     button.classList.add('completed');
                     button.textContent = '已完成';
+
+                    // 获取 planid 信息
+                    const planIds = [];
+                    document.querySelectorAll('.exercise-planid').forEach(planidElement => {
+                        planIds.push(planidElement.textContent.trim());
+                    });
+
+                    // 调用新的 API
+                    fetch('/plan/workout/update', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ planIds: planIds })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        // 成功后跳转到新页面
+                        window.location.href = '/plan/workout/update';
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
                 }
             });
         });

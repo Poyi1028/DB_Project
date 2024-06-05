@@ -18,6 +18,7 @@ html {
     position: fixed;
     top: 0;
     text-align: center;
+    left: 500px;
     font-size: 6em;
     font-family: 'Times New Roman', Times, serif;
     text-shadow: #83858d 3px 4px;
@@ -25,15 +26,7 @@ html {
     margin-top: 10px;
 }
 
-.bottom-center-image {
-    position: absolute;
-    bottom: 0px;
-    right: 450px;
-    width: 30%;
-    height: 45%;
-    object-fit: cover;
-    /* 確保圖片覆蓋整個容器 */
-}
+
 
 .back-button {
     position: absolute;
@@ -66,11 +59,11 @@ body {
 
 /* 設置框架的高度和水平居中 */
 .frame {
-    height: 30vh;
+    height: 50vh;
     display: flex;
     align-items: center;
     /* 水平居中對齊 */
-    justify-content: center;
+    justify-content: bottom;
     /* 垂直居中對齊 */
     cursor: pointer;
     gap: 150px;
