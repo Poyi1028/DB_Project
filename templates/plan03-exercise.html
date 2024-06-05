@@ -14,325 +14,45 @@
             </svg>
             回上頁
         </button>
-        <div class="headline">DISH CHOICE</div>
+        <div class="headline">Training List</div>
     </div>
     <div class="container">
-        <div class="table-container">
-            <div class="day-keyword">Day 1</div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Equipment</th>
-                        <th>Weight (kg)</th>
-                        <th>Times</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Equipment 1</td>
-                        <td><input type="number" value="12"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Equipment 2</td>
-                        <td><input type="number" value="15"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Equipment 3</td>
-                        <td><input type="number" value="20"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Equipment 4</td>
-                        <td><input type="number" value="25"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="button-container">
-                <button id="toggleButton" class="status-button">未完成</button>
+        {% for day in range(1, days + 1) %}
+            <div class="table-container">
+                <div class="day-keyword">Day {{ day }}</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Exercise</th>
+                            <th>Training Area</th>
+                            <th>Weight (kg)</th>
+                            <th>Sets</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if day in selected_plan %}
+                            {% for exercise in selected_plan[day] %}
+                                <tr>
+                                    <td>{{ exercise.exercise }}</td>
+                                    <td>{{ exercise.muscle_group }}</td>
+                                    <td><input type="number" value="12"></td>
+                                    <td>
+                                        <input type="number" value="{{ exercise.set_value }}" class="times-input">
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="4">No exercises for this day</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+                <div class="button-container">
+                    <button class="status-button">未完成</button>
+                </div>
             </div>
-        </div>
-        <!-- Repeat the above table-container block for the remaining 6 tables -->
-        <div class="table-container">
-            <div class="day-keyword">Day 2</div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Equipment</th>
-                        <th>Weight (kg)</th>
-                        <th>Times</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Equipment 1</td>
-                        <td><input type="number" value="12"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Equipment 2</td>
-                        <td><input type="number" value="15"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Equipment 3</td>
-                        <td><input type="number" value="20"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Equipment 4</td>
-                        <td><input type="number" value="25"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="button-container">
-                <button id="toggleButton" class="status-button">未完成</button>
-            </div>
-        </div>
-        <div class="table-container">
-            <table>
-                <div class="day-keyword">Day 3</div>
-                <thead>
-                    <tr>
-                        <th>Equipment</th>
-                        <th>Weight (kg)</th>
-                        <th>Times</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Equipment 1</td>
-                        <td><input type="number" value="12"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Equipment 2</td>
-                        <td><input type="number" value="15"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Equipment 3</td>
-                        <td><input type="number" value="20"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Equipment 4</td>
-                        <td><input type="number" value="25"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="button-container">
-                <button id="toggleButton" class="status-button">未完成</button>
-            </div>
-        </div>
-        <div class="table-container">
-            <table>
-                <div class="day-keyword">Day 4</div>
-                <thead>
-                    <tr>
-                        <th>Equipment</th>
-                        <th>Weight (kg)</th>
-                        <th>Times</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Equipment 1</td>
-                        <td><input type="number" value="12"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Equipment 2</td>
-                        <td><input type="number" value="15"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Equipment 3</td>
-                        <td><input type="number" value="20"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Equipment 4</td>
-                        <td><input type="number" value="25"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="button-container">
-                <button id="toggleButton" class="status-button">未完成</button>
-            </div>
-        </div>
-        <div class="table-container">
-            <table>
-                <div class="day-keyword">Day 5</div>
-                <thead>
-                    <tr>
-                        <th>Equipment</th>
-                        <th>Weight (kg)</th>
-                        <th>Times</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Equipment 1</td>
-                        <td><input type="number" value="12"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Equipment 2</td>
-                        <td><input type="number" value="15"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Equipment 3</td>
-                        <td><input type="number" value="20"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Equipment 4</td>
-                        <td><input type="number" value="25"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="button-container">
-                <button id="toggleButton" class="status-button">未完成</button>
-            </div>
-        </div>
-        <div class="table-container">
-            <table>
-                <div class="day-keyword">Day 6</div>
-                <thead>
-                    <tr>
-                        <th>Equipment</th>
-                        <th>Weight (kg)</th>
-                        <th>Times</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Equipment 1</td>
-                        <td><input type="number" value="12"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Equipment 2</td>
-                        <td><input type="number" value="15"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Equipment 3</td>
-                        <td><input type="number" value="20"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Equipment 4</td>
-                        <td><input type="number" value="25"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="button-container">
-                <button id="toggleButton" class="status-button">未完成</button>
-            </div>
-        </div>
-        <div class="table-container">
-            <table>
-                <div class="day-keyword">Day 7</div>
-                <thead>
-                    <tr>
-                        <th>Equipment</th>
-                        <th>Weight (kg)</th>
-                        <th>Times</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Equipment 1</td>
-                        <td><input type="number" value="12"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Equipment 2</td>
-                        <td><input type="number" value="15"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Equipment 3</td>
-                        <td><input type="number" value="20"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Equipment 4</td>
-                        <td><input type="number" value="25"></td>
-                        <td>
-                            <input type="number" value="4" class="times-input">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="button-container">
-                <button id="toggleButton" class="status-button">未完成</button>
-            </div>
-        </div>
+        {% endfor %}
     </div>
     <script>
         document.querySelectorAll('.status-button').forEach(button => {

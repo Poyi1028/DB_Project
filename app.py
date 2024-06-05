@@ -1,4 +1,4 @@
-from flask import Flask, redirect, request, render_template, session, jsonify
+from flask import Flask, redirect, request, render_template, session, jsonify, flash, url_for
 import pymysql
 from datetime import date, datetime
 
@@ -167,15 +167,119 @@ def menu():
     return render_template('plan01.html')
 
 # 健身菜單頁面
-@app.route('/plan/workout')
-def workout_plan():
-    return render_template('plan02-exercise.html')
+@app.route("/plan/workout", methods=["GET", "POST"])
+def workout():
+    if request.method == "POST":
+        days = int(request.form.get("days"))
+        intensity = request.form.get("intensity")
+
+        set_value = 3
+        if intensity == '中':
+            set_value = 4
+        elif intensity == '強':
+            set_value = 5
+
+        connection = get_db_conn()
+
+        try:
+            with connection.cursor() as cursor:
+                exercises_by_day = {
+                    1: [
+                        ('5035', '槓鈴深蹲', '腿部'),
+                        ('5020', '硬舉', '全身'),
+                        ('5036', '槓鈴臥推', '胸部'),
+                        ('5014', '闊背下拉', '背部')
+                    ],
+                    2: [
+                        ('5036', '槓鈴臥推', '胸部'),
+                        ('5037', '啞鈴側平舉', '肩部'),
+                        ('5014', '闊背下拉', '背部'),
+                        ('5012', '機械式肩推', '肩推')
+                    ],
+                    3: [
+                        ('5036', '槓鈴臥推', '胸部'),
+                        ('5038', '啞鈴上斜臥推', '胸部'),
+                        ('5012', '機械式肩推', '肩部'),
+                        ('5037', '啞鈴側平舉', '肩部')
+                    ],
+                    4: [
+                        ('5038', '啞鈴上斜臥推', '胸部'),
+                        ('5039', '飛鳥夾胸', '胸部'),
+                        ('5040', '固定式機械胸推', '胸部'),
+                        ('5041', '三頭滑輪下壓', '三頭肌')
+                    ],
+                    5: [
+                        ('5005', '啞鈴二頭彎舉', '二頭肌'),
+                        ('5041', '三頭滑輪下壓', '三頭肌'),
+                        ('5042', '過頭三頭屈伸', '三頭肌'),
+                        ('5006', '槓鈴彎舉', '二頭肌')
+                    ],
+                    6: [
+                        ('5036', '槓鈴臥推', '胸部'),
+                        ('5038', '啞鈴上斜臥推', '胸部'),
+                        ('5039', '飛鳥夾胸', '胸部'),
+                        ('5040', '固定式機械胸推', '胸部')
+                    ],
+                    7: [
+                        ('5036', '槓鈴臥推', '胸部'),
+                        ('5038', '啞鈴上斜臥推', '胸部'),
+                        ('5039', '飛鳥夾胸', '胸部'),
+                        ('5040', '固定式機械胸推', '胸部')
+                    ]
+                }
+    
+                for day in range(1, days + 1):
+                    for equipment_id, exercise, muscle_group in exercises_by_day[day][:4]:  # 確保每天只插入四個動作
+                        sql = """
+                        INSERT INTO exercise_plan (User_ID, Equipment_ID, Status, Completed_Date, Object, Training_Area, Weight, `Set`, Training_Detail, day) 
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s) 
+                        """
+                        cursor.execute(sql, (int(session['id']), equipment_id, 'Undone', date.today(), '增肌', muscle_group, 5, set_value, exercise, day))
+                connection.commit()
+                
+            flash("Workout plan recorded successfully!")
+            return redirect(url_for("generate_plan", days=days))
+        except Exception as e:
+            return str(e)
+        finally:
+            connection.close()
+    else:
+        return render_template("plan02-exercise.html")
 
 # 健身菜單製作
-@app.route('/plan/workout/make')
-def workout_make():
-    return render_template('plan03-exercise.html')
+@app.route("/plan/workout/make/<int:days>")
+def generate_plan(days):
+    conn = get_db_conn()
+    try:
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+            sql = """
+            SELECT ep.day, ep.Training_Detail, ep.Training_Area, ep.`Set`, eq.name as equipment
+            FROM exercise_plan ep
+            JOIN equipment eq ON ep.Equipment_ID = eq.equipment_id
+            WHERE ep.day <= %s AND ep.User_ID = %s
+            ORDER BY ep.day, ep.Plan_ID
+            """
+            cursor.execute(sql, (days, int(session['id'])))
+            result = cursor.fetchall()
 
+            selected_plan = {}
+            for row in result:
+                day = row['day']
+                exercise = row['equipment']
+                muscle_group = row['Training_Area']
+                set_value = row['Set']
+                if day not in selected_plan:
+                    selected_plan[day] = []
+                if len(selected_plan[day]) < 4:
+                    selected_plan[day].append({
+                        "exercise": exercise,
+                        "muscle_group": muscle_group,
+                        "set_value": set_value
+                    })
+
+        return render_template("plan03-exercise.html", days=days, selected_plan=selected_plan)
+    finally:
+        conn.close()
 # 飲食菜單頁面
 @app.route('/plan/nutrition', methods=['GET', 'POST'])
 def nutrition_menu():
@@ -301,7 +405,7 @@ def nutrition_update():
     finally:
         cursor.close()
 
-# 搜尋主頁面
+# 搜尋主頁面    
 @app.route('/search')
 def search():
     return render_template('search-homepage.html')
