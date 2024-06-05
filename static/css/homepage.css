@@ -21,7 +21,7 @@
 .membership {
     display: flex;
     height: 10vh;
-    border-radius: 15px;
+    border-radius: 50px;
 }
 
 .icon-button {
@@ -34,8 +34,8 @@
     width: 90%;
     /* 佔據網頁寬度的90% */
     padding: 20px;
-    border-radius: 15px;
-    background-color: white;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
 }
 
 span {
