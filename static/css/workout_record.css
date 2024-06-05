@@ -46,7 +46,7 @@ body {
 .top-left-image {
     position: absolute;
     top: 0px;
-    left: 30px;
+    left: 100px;
     width: 20%;
     height: 35%;
     object-fit: cover;

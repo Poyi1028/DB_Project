@@ -10,7 +10,7 @@ body {
     position: absolute;
     top: 10px;
     left: 2%;
-    background-color: #006779;
+    background-color: #de7ece;
     border: none;
     cursor: pointer;
     font-size: 1.2em;
@@ -29,10 +29,10 @@ body {
   }
 .bottom-right-image {
     position: absolute;
-    top: 25px;
+    top: 0px;
     right: 0;
-    width: 30%;
-    height: 30%;
+    width: 29%;
+    height: 29%;
     object-fit: cover;
     /* 確保圖片覆蓋整個容器 */
 }
