@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
     <title>運動菜單完成</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/plan03-exercise.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/plan03-exercise.css" />
 </head>
+
 <body>
     <div class="header">
         <button onclick="back()" class="back-button">
@@ -50,7 +52,7 @@
                             {% endfor %}
                         {% else %}
                             <tr>
-                                <td colspan="4">No exercises for this day</td>
+                                <td colspan="5">No exercises for this day</td>
                             </tr>
                         {% endif %}
                     </tbody>
@@ -86,4 +88,5 @@
         }
     </script>
 </body>
+
 </html>
