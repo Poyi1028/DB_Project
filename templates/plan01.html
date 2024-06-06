@@ -58,6 +58,21 @@
             </a>
         </div>
     </div>
+
+    <!-- <script>
+        function checkAttributeAndRedirect() {
+            fetch('/check_attribute')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.skip) {
+                        window.location.href = '/plan/workout';  // 跳轉到C頁面
+                    } else {
+                        window.location.href = '/plan/workout/make/1';  // 跳轉到B頁面
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script> -->
     </body>
 
 </html>
