@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
     <title>運動菜單完成</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/plan03-exercise.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/plan03-exercise.css" />
 </head>
+
 <body>
     <div class="header">
         <button onclick="history.back()" class="back-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
             </svg>
             回上頁
         </button>
@@ -18,45 +22,45 @@
     </div>
     <div class="container">
         {% for day in range(1, days + 1) %}
-            <div class="table-container">
-                <div class="day-keyword">Day {{ day }}</div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Exercise</th>
-                            <th>Training Area</th>
-                            <th>Weight (kg)</th>
-                            <th>Sets</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% if day in selected_plan %}
-                            {% for exercise in selected_plan[day] %}
-                                <tr>
-                                    <td>{{ exercise.exercise }}</td>
-                                    <td>{{ exercise.muscle_group }}</td>
-                                    <td><input type="number" value="12"></td>
-                                    <td>
-                                        <input type="number" value="{{ exercise.set_value }}" class="times-input">
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        {% else %}
-                            <tr>
-                                <td colspan="4">No exercises for this day</td>
-                            </tr>
-                        {% endif %}
-                    </tbody>
-                </table>
-                <div class="button-container">
-                    <button class="status-button">未完成</button>
-                </div>
+        <div class="table-container">
+            <div class="day-keyword">Day {{ day }}</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>項目</th>
+                        <th>訓練部位</th>
+                        <th>磅數 (kg)</th>
+                        <th>組數</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if day in selected_plan %}
+                    {% for exercise in selected_plan[day] %}
+                    <tr>
+                        <td>{{ exercise.exercise }}</td>
+                        <td>{{ exercise.muscle_group }}</td>
+                        <td><input type="number" value="12"></td>
+                        <td>
+                            <input type="number" value="{{ exercise.set_value }}" class="times-input">
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="4">No exercises for this day</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+            <div class="button-container">
+                <button class="status-button">未完成</button>
             </div>
+        </div>
         {% endfor %}
     </div>
     <script>
         document.querySelectorAll('.status-button').forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function () {
                 if (button.classList.contains('completed')) {
                     button.classList.remove('completed');
                     button.textContent = '未完成';
@@ -68,4 +72,5 @@
         });
     </script>
 </body>
+
 </html>

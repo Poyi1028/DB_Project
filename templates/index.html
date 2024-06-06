@@ -10,8 +10,8 @@
     <div class="header-container">
         <h1>健人就是繳錢</h1>
         <div class="button-container">
-            <button id="loginBtn">LOGIN</button>
-            <button id="registerBtn">REGISTER</button>
+            <button id="loginBtn">登入</button>
+            <button id="registerBtn">註冊</button>
         </div>
     </div>
 
@@ -19,13 +19,13 @@
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>LOGIN PAGE</h2>
+            <h2>登入</h2>
             <form action="/home" method="post">
-                <label for="username">USER ID</label>
+                <label for="username">使用者ID</label>
                 <input type="text" id="user-id" name="login_ID" required>
-                <label for="password">PASSWORD</label>
+                <label for="password">密碼</label>
                 <input type="password" id="password" name="login_ps" required>
-                <button type="submit">LOGIN</button>
+                <button type="submit">登入</button>
             </form>
         </div>
     </div>
@@ -34,35 +34,35 @@
     <div id="registerModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>REGISTER PAGE</h2>
+            <h2>註冊</h2>
             <form action="/register" method="post">
-                <label for="user-id">USER ID</label>
+                <label for="user-id">使用者ID</label>
                 <input type="text" id="user-id" name="regis_ID" required>
-                <label for="new-username">USER NAME</label>
+                <label for="new-username">使用者名稱</label>
                 <input type="text" id="new-username" name="name" required>
-                <label for="new-password">PASSWORD</label>
+                <label for="new-password">密碼</label>
                 <input type="password" id="new-password" name="regis_ps" required>
-                <label for="confirm-password">COMFIRM PASSWORD</label>
+                <label for="confirm-password">再次確認密碼</label>
                 <input type="password" id="confirm-password" name="confirm_ps" required>
                 <div class="form-row">
                     <div>
-                        <label for="gender">GENDER</label>
+                        <label for="gender">性別</label>
                         <select id="gender" name="gender">
-                            <option value="">CHOOSE</option>
-                            <option value="male">MALE</option>
-                            <option value="female">FEMALE</option>
+                            <option value="">選擇</option>
+                            <option value="male">男性</option>
+                            <option value="female">女性</option>
                         </select>
                     </div>
                     <div>
-                        <label for="height">HEIGHT(cm)</label>
+                        <label for="height">身高(cm)</label>
                         <input type="number" id="height" name="height" required>
                     </div>
                     <div>
-                        <label for="weight">WEIGHT(kg)</label>
+                        <label for="weight">體重(kg)</label>
                         <input type="number" id="weight" name="weight" required>
                     </div>
                 </div>
-                <button type="submit">REGISTER</button>
+                <button type="submit">註冊</button>
             </form>
         </div>
     </div>
@@ -71,8 +71,8 @@
     <div id="registerSuccessModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>REGISTER SUCCESSFULLY</h2>
-            <p>START WORKOUT!</p>
+            <h2>註冊成功</h2>
+            <p>開始健身吧!</p>
         </div>
     </div>
 
@@ -80,8 +80,8 @@
     <div id="registerFailModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>REGISTER UNDONE</h2>
-            <p>PLEASE TRY AGAIN！</p>
+            <h2>註冊失敗</h2>
+            <p>再試一次！</p>
         </div>
     </div>
 
