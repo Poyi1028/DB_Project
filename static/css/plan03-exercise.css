@@ -93,9 +93,8 @@ input[type="number"] {
     color: white;
     border: none;
     margin-top: 5px;
-    margin-left: 88%;
-    padding: 15px 15px;
-    font-size: 18px;
+    padding: 8px;
+    font-size: 14px;
     font-weight: bold;
     border-radius: 10px;
     cursor: pointer;

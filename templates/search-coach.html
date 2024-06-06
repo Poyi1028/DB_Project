@@ -39,28 +39,27 @@
             <div class="form-group">
                 <label for="body-part-select">專長</label>
                 <select id="body-part-select" class="form-control">
-                    <option value="胸肌">胸肌</option>
-                    <option value="背肌">背肌</option>
-                    <option value="腹肌">腹肌</option>
-                    <option value="肩膀">肩膀</option>
-                    <option value="二頭肌">二頭肌</option>
-                    <option value="三頭肌">三頭肌</option>
-                    <option value="腿部">腿部</option>
-                    <option value="臀部">臀部</option>
+                    <option value="健美">健美</option>
+                    <option value="健力">健力</option>
+                    <option value="舉重">舉重</option>
+                    <option value="體能訓練">體能訓練</option>
+                    <option value="復健訓練">復健訓練</option>
+                    <option value="心肺訓練">心肺訓練</option>
+                    <option value="格鬥訓練">格鬥訓練</option>
                 </select>
             </div>
             <button id="search-button" class="btn btn-primary mt-4" onclick="searchCoach(this)">搜尋</button>
         </div>
         <div id="results-section" class="mt-5">
             {% for coach in coaches %}
-            <div class="result-card">
-                <img src="{{ coach.get('image_url') }}" alt="{{ coach.get('Name') }}" style="width:100px; height:100px;">
-                <h4>{{coach.get('name')}}</h4>
-                <p>專長： {{coach.get('expertise')}}</p>
-                <p>身高： {{coach.get('height')}}</p>
-                <p>體重： {{coach.get('weight')}}</p>
-
-            </div>
+                <div class="result-card">
+                    <img src="{{ coach.get('image_url') }}" alt="{{ coach.get('Name') }}" style="width:100px; height:100px;">
+                    <h4>{{coach.get('name')}}</h4>
+                    <p>專長： {{coach.get('expertise')}}</p>
+                    <p>身高： {{coach.get('height')}}</p>
+                    <p>體重： {{coach.get('weight')}}</p>
+                    <p>收費/小時： {{coach.get('Charge')}}</p>
+                </div>
             {% endfor %}
         </div>
     </div>

@@ -290,37 +290,30 @@ def generate_plan():
     finally:
         conn.close()
 
-@app.route("/plan/workout/update", methods=["GET", "POST"])
+# 菜單確認完成的頁面
+@app.route('/update_status', methods=['POST'])
 def update_status():
-    conn = get_db_conn()
-    data = request.get_json()  # 获取 JSON 数据
-    plan_ids = data.get('planIds', [])  # 获取 planIds 列表
+    # 獲取前端傳遞的 Json 檔案 (該健身菜單的 id)
+    data = request.json
+    plan_id = data['plan_id']
+
     try:
+        conn = get_db_conn()
         with conn.cursor() as cursor:
-            for plan_id in plan_ids:
-                sql = "UPDATE exercise_plan SET Status = 'Done' WHERE Plan_ID = %s"
-                cursor.execute(sql, (plan_id))
-        conn.commit()
-        return render_template('workoutSuccess.html')
+            # 將該 id 的菜單設置為完成
+            sql = """
+            UPDATE exercise_plan
+            SET Status = 'Done'
+            WHERE Plan_ID = %s
+            """
+            cursor.execute(sql, (int(plan_id)))
+            conn.commit()
     except Exception as e:
         return str(e)
     finally:
         conn.close()
 
-# @app.route('/check_attribute')
-# def check_attribute():
-#     conn = get_db_conn()
-#     try:
-#         with conn.cursor() as cursor:
-#             sql = "SELECT Status FROM exercise_plan WHERE Status = 'Undone' AND User_ID = %s"
-#             cursor.execute(sql, (int(session['id'])))
-#             result = cursor.fetchone()
-#             if result and result['Status'] == 'Undone':
-#                 return jsonify({'skip': True})
-#             else:
-#                 return jsonify({'skip': False})
-#     finally:
-#         conn.close()
+    return jsonify({'success': True}), 200
 
 # 飲食菜單頁面
 @app.route('/plan/nutrition', methods=['GET', 'POST'])

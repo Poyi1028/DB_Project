@@ -27,6 +27,7 @@
                             <th>Training Area</th>
                             <th>Weight (kg)</th>
                             <th>Sets</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,8 +40,12 @@
                                     <td>
                                         <input type="number" value="{{ exercise.set_value }}" class="times-input">
                                     </td>
-                                    <td style="display:none;" class="exercise-status">{{ exercise.status }}</td> <!-- 隱藏狀態信息 -->
-                                    <td style="display:none;" class="exercise-status">{{ exercise.plan_id }}</td> <!-- 隱藏狀態信息 -->
+                                    <td>
+                                        <button class="status-button {{ 'completed' if exercise.status == 'Done' else ''}}"
+                                                data-plan-id="{{ exercise.plan_id }}"
+                                                data-status="{{ exercise.status }}"
+                                                onclick="updateStatus(this)">{{ '已完成' if exercise.status == 'Done' else '未完成' }}</button>
+                                    </td>
                                 </tr>
                             {% endfor %}
                         {% else %}
@@ -51,7 +56,6 @@
                     </tbody>
                 </table>
                 <div class="button-container">
-                    <button class="status-button">未完成</button>
                 </div>
             </div>
         {% endfor %}
@@ -60,55 +64,26 @@
         function back() {
             window.location.href = "/plan";
         }
-        // 初始化按钮状态
-        window.addEventListener('DOMContentLoaded', (event) => {
-            const statuses = [];
-            document.querySelectorAll('.exercise-status').forEach(statusElement => {
-                statuses.push(statusElement.textContent.trim());
-            });
-            
-            const button = document.querySelector('.status-button');
-            if (statuses.includes('Done')) {
-                button.classList.add('completed');
-                button.textContent = '已完成';
-            }
-        });
+        function updateStatus(button) {
+            const planId = button.getAttribute('data-plan-id');
+            const currentStatus = button.getAttribute('data-status');
+            const newStatus = currentStatus === 'Done' ? 'Not Done' : 'Done';
 
-        document.querySelectorAll('.status-button').forEach(button => {
-            button.addEventListener('click', function() {
-                if (button.classList.contains('completed')) {
-                    button.classList.remove('completed');
-                    button.textContent = '未完成';
-                } else {
-                    button.classList.add('completed');
-                    button.textContent = '已完成';
-
-                    // 获取 planid 信息
-                    const planIds = [];
-                    document.querySelectorAll('.exercise-planid').forEach(planidElement => {
-                        planIds.push(planidElement.textContent.trim());
-                    });
-
-                    // 调用新的 API
-                    fetch('/plan/workout/update', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ planIds: planIds })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Success:', data);
-                        // 成功后跳转到新页面
-                        window.location.href = '/plan/workout/update';
-                    })
-                    .catch((error) => {
-                        console.error('Error:', error);
-                    });
+            // 發送Ajax請求到後端更新狀態
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/update_status', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // 更新按鈕狀態
+                    button.setAttribute('data-status', newStatus);
+                    button.textContent = newStatus === 'Done' ? '已完成' : '未完成';
+                    button.classList.toggle('completed');
                 }
-            });
-        });
+            };
+            const data = JSON.stringify({ plan_id: planId });
+            xhr.send(data);
+        }
     </script>
 </body>
 </html>

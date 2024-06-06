@@ -53,11 +53,18 @@
         </div>
         <div id="results-section" class="mt-5">
             {% for equipment in equipments %}
-            <div class="result-card">
-                <h4>{{equipment.get('Name')}}</h4>
-                <p>器材： {{equipment.get('Name')}}</p>
-                <p>訓練部位： {{equipment.get('Training_Area')}}</p>
-            </div>
+                <div class="result-card">
+                    <h4>{{ equipment.get('Name') }}</h4>
+                    <p>器材： {{ equipment.get('Name') }}</p>
+                    <p>訓練部位： {{ equipment.get('Training_Area') }}</p>
+                    {% if equipment.get('Video_Link') %}
+                        <p>範例影片：
+                            <a href="{{ equipment.get('Video_Link') }}" target="_blank">點擊觀看</a>
+                        </p>
+                    {% else %}
+                        <p>範例影片：無</p>
+                    {% endif %}
+                </div>
             {% endfor %}
         </div>
     </div>
