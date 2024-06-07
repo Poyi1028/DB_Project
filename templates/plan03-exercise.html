@@ -25,11 +25,12 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Exercise</th>
-                            <th>Training Area</th>
-                            <th>Weight (kg)</th>
-                            <th>Sets</th>
-                            <th>Status</th>
+                            <th>健身項目 / 器材</th>
+                            <th>訓練部位</th>
+                            <th>單位</th>
+                            <th>組數</th>
+                            <th>完成</th>
+                            <th>編輯</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,15 +39,18 @@
                                 <tr>
                                     <td>{{ exercise.exercise }}</td>
                                     <td>{{ exercise.muscle_group }}</td>
-                                    <td><input type="number" value="12"></td>
-                                    <td>
-                                        <input type="number" value="{{ exercise.set_value }}" class="times-input">
-                                    </td>
+                                    <td><input class="input" id="weight-{{ exercise.plan_id }}" value="{{ exercise.weight }}"></td>
+                                    <td><input class="input" id="set-{{ exercise.plan_id }}" value="{{ exercise.set_value }}"></td>                     
                                     <td>
                                         <button class="status-button {{ 'completed' if exercise.status == 'Done' else ''}}"
                                                 data-plan-id="{{ exercise.plan_id }}"
                                                 data-status="{{ exercise.status }}"
                                                 onclick="updateStatus(this)">{{ '已完成' if exercise.status == 'Done' else '未完成' }}</button>
+                                    </td>
+                                    <td>
+                                        <button class="edit-button"
+                                                data-plan-id="{{ exercise.plan_id }}"
+                                                onclick="edit(this)">修改菜單</button>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -85,6 +89,26 @@
             };
             const data = JSON.stringify({ plan_id: planId });
             xhr.send(data);
+        }
+        function edit(button) {
+            const planID = button.getAttribute('data-plan-id');
+            const weight = document.getElementById(`weight-${planID}`).value;
+            const set = document.getElementById(`set-${planID}`).value;
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/update_plan', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            const data = JSON.stringify({ plan_id: planID, weight: weight, set: set });
+            xhr.send(data);
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        alert('菜單成功更新');
+                        // 可以在這裡添加成功提示或其他處理
+                    } 
+                }
+            };
         }
     </script>
 </body>

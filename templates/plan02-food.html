@@ -7,133 +7,225 @@
     <title>健康攝取</title>
     <link rel="stylesheet" href="/static/css/plan02-food.css">
 </head>
-<body">
+
+<body>
     <div class="header">
-        <div class="headline">NUTRITION LIST</div>
-    </div>
-    <button onclick="back()" class="back-button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left"
-            viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
-        </svg>
-        回上頁
-    </button>
-    <div class="container">
         <form action="/plan/nutrition/update" method="GET">
-            <!-- <div class="container"> -->
-            <div class="row">
-                <div class="circle water">
-                    <div class="content">
-                        <div class="name">水</div>
-                        <div class="amount">
-                            <input id="water-amount" name="water"
-                                value="{{ nutrient_data['water']|int }} / {{ water|int }} ml"
-                                style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;"
-                                readonly>
-                        </div>
-                    </div>
-                    <button type="button" class="plus-button">+</button>
-                </div>
-                <div class="circle protein">
-                    <div class="content">
-                        <div class="name">蛋白質</div>
-                        <div class="amount">
-                            <input id="protein-amount" name="pro"
-                                style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;"
-                                value="{{ nutrient_data['protein']|int }} / {{ protein|int }} g" readonly>
-                        </div>
-                    </div>
-                    <button type="button" class="plus-button">+</button>
-                </div>
-                <div class="circle calories">
-                    <div class="content">
-                        <div class="name">熱量</div>
-                        <div class="amount">
-                            <input id="calories-amount" name="cals"
-                                style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;"
-                                value="{{ nutrient_data['calories']|int }} / {{ cal|int }} cal" readonly>
-                        </div>
-                    </div>
-                    <button type="button" class="plus-button">+</button>
+        <div class="headline">NUTRITION LIST</div>
+        <div class="container">
+            <div class="section-title">自動記錄區</div>
+            <div class="auto-record">
+                <div class="flex">
+                    <div>攝取食物選項</div>
+                    <select id="food-select" name="food">
+                        <option value="">攝取食物選項：</option>
+                        <option value="chicken breast">雞胸肉</option>
+                        <option value="rice">米飯</option>
+                        <option value="soy milk">豆漿</option>
+                    </select>
+                    <input class="food-weight" type="number" id="food-weight" name="weight" placeholder="輸入克數" min="0"
+                        step="1">
+                    <div>g</div>
+                    <button id="auto-plus-button" class="auto-plus-button">+</button>
                 </div>
             </div>
-            <div class="row">
-                <div class="circle carbs">
-                    <div class="content">
-                        <div class="name">碳水化合物</div>
-                        <div class="amount">
-                            <input id="carbs-amount" name="carbs"
-                                style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;"
-                                value="{{ nutrient_data['carbohydrate']|int }} / {{ carbs|int }} g" readonly>
+        </div>
+        <button type="button" onclick="back()" class="back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+            </svg>
+            回上頁
+        </button>
+
+        <div class="container">
+            <div class="section-title">手動記錄區</div>
+            <!-- <form action="/plan/nutrition/update" method="GET"> -->
+                <div class="row">
+                    <div class="circle water">
+                        <div class="content">
+                            <div class="name">水</div>
+                            <div class="amount">
+                                <input id="water-amount" name="water"
+                                    value="{{ nutrient_data['water']|int }} / {{ water|int }} ml"
+                                    style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;"
+                                    readonly>
+                            </div>
                         </div>
+                        <button type="button" class="plus-button">+</button>
                     </div>
-                    <button type="button" class="plus-button">+</button>
-                </div>
-                <div class="circle fat">
-                    <div class="content">
-                        <div class="name">脂肪</div>
-                        <div class="amount">
-                            <input id="fat-amount" name="fat"
-                                style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;"
-                                value="{{ nutrient_data['fat']|int }} / {{ fat|int }} g" readonly>
+                    <div class="circle protein">
+                        <div class="content">
+                            <div class="name">蛋白質</div>
+                            <div class="amount">
+                                <input id="protein-amount" name="pro"
+                                    style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;"
+                                    value="{{ nutrient_data['protein']|int }} / {{ protein|int }} g" readonly>
+                            </div>
                         </div>
+                        <button type="button" class="plus-button">+</button>
                     </div>
-                    <button type="button" class="plus-button">+</button>
+                    <div class="circle calories">
+                        <div class="content">
+                            <div class="name">熱量</div>
+                            <div class="amount">
+                                <input id="calories-amount" name="cals"
+                                    style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;"
+                                    value="{{ nutrient_data['calories']|int }} / {{ cal|int }} cal" readonly>
+                            </div>
+                        </div>
+                        <button type="button" class="plus-button">+</button>
+                    </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="circle carbs">
+                        <div class="content">
+                            <div class="name">碳水化合物</div>
+                            <div class="amount">
+                                <input id="carbs-amount" name="carbs"
+                                    style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;"
+                                    value="{{ nutrient_data['carbohydrate']|int }} / {{ carbs|int }} g" readonly>
+                            </div>
+                        </div>
+                        <button type="button" class="plus-button">+</button>
+                    </div>
+                    <div class="circle fat">
+                        <div class="content">
+                            <div class="name">脂肪</div>
+                            <div class="amount">
+                                <input id="fat-amount" name="fat"
+                                    style="text-align: center; border: transparent; font-size: 14px; font-weight: bold;"
+                                    value="{{ nutrient_data['fat']|int }} / {{ fat|int }} g" readonly>
+                            </div>
+                        </div>
+                        <button type="button" class="plus-button">+</button>
+                    </div>
+                </div>
 
+                <div class="popup">
+                    <select id="substance">
+                        <option value="water">水</option>
+                        <option value="protein">蛋白質</option>
+                        <option value="calories">熱量</option>
+                        <option value="carbs">碳水化合物</option>
+                        <option value="fat">脂肪</option>
+                    </select>
+                    <textarea id="amount" placeholder="輸入攝取量"></textarea>
+                    <button type="submit" id="add-button">新增</button>
+                </div>
+        </div>
+        </form>
 
-            <div class="popup">
-                <select id="substance">
-                    <option value="water">水</option>
-                    <option value="protein">蛋白質</option>
-                    <option value="calories">熱量</option>
-                    <option value="carbs">碳水化合物</option>
-                    <option value="fat">脂肪</option>
-                </select>
-                <textarea id="amount" placeholder="輸入攝取量"></textarea>
-                <button type="submit" id="add-button">新增</button>
-                <!-- <button type="submit">新增完畢</button> -->
-            </div>
-    </div>
-    </form>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const nutrientData = {
+                    'chicken breast': { protein: 31, calories: 165, carbohydrate: 0, fat: 3.6, water: 65.26 },
+                    'rice': { protein: 2.7, calories: 130, carbohydrate: 28, fat: 0.3, water: 69 },
+                    'soy milk': { protein: 3.3, calories: 54, carbohydrate: 6, fat: 1.8, water: 90.4 }
+                };
 
-    <script>
-        function back() {
-            window.location.href = "/plan"
-        }
-        document.addEventListener('DOMContentLoaded', function () {
-            const plusButtons = document.querySelectorAll('.plus-button');
-            const popup = document.querySelector('.popup');
-            const substanceSelect = document.getElementById('substance');
-            const amountInput = document.getElementById('amount');
+                document.getElementById('auto-plus-button').addEventListener('click', () => {
+                    const food = document.getElementById('food-select').value;
+                    const weight = parseInt(document.getElementById('food-weight').value);
+                    if (food && weight > 0) {
+                        const nutrients = nutrientData[food];
+                        const updatedNutrients = {
+                            protein: Math.round((nutrients.protein * weight) / 100),
+                            calories: Math.round((nutrients.calories * weight) / 100),
+                            carbohydrate: Math.round((nutrients.carbohydrate * weight) / 100),
+                            fat: Math.round((nutrients.fat * weight) / 100),
+                            water: Math.round((nutrients.water * weight) / 100)
+                        };
+                        updateNutrientDisplay(updatedNutrients);
+                        saveNutrientData(updatedNutrients);
+                    } else {
+                        alert('請選擇食物並輸入克數');
+                    }
+                });
 
-            plusButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    popup.classList.add('active');
-                    const substance = button.parentNode.classList[1]; // 获取圆圈的类名（物质名称）
-                    substanceSelect.value = substance; // 将物质名称设为下拉框的值
+                function updateNutrientDisplay(nutrients) {
+                    const nutrientIds = {
+                        water: 'water-amount',
+                        protein: 'protein-amount',
+                        calories: 'calories-amount',
+                        carbohydrate: 'carbs-amount',
+                        fat: 'fat-amount'
+                    };
+                    for (const [key, value] of Object.entries(nutrients)) {
+                        const input = document.getElementById(nutrientIds[key]);
+                        const [currentAmount, totalAmountWithUnit] = input.value.split(' / ');
+                        const currentAmountFloat = parseFloat(currentAmount);
+                        if (isNaN(currentAmountFloat)) {
+                            input.value = `${value} / ${totalAmountWithUnit}`;
+                        } else {
+                            const totalAmount = parseInt(totalAmountWithUnit.replace(/[^\d]/g, ''));
+                            const unit = totalAmountWithUnit.replace(/[\d]/g, '').trim();
+                            const newAmount = currentAmountFloat + value;
+
+                            input.value = `${Math.round(newAmount)} / ${totalAmount} ${unit}`;
+                        }
+                    }
+                }
+
+                function saveNutrientData(nutrients) {
+                    const formData = new FormData();
+                    formData.append('water', nutrients.water);
+                    formData.append('protein', nutrients.protein);
+                    formData.append('calories', nutrients.calories);
+                    formData.append('carbohydrate', nutrients.carbohydrate);
+                    formData.append('fat', nutrients.fat);
+
+                    fetch('/plan/nutrition/update', {
+                        method: 'POST',
+                        body: formData
+                    }).then(response => response.json())
+                        .then(data => {
+                            console.log('Success:', data);
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                        });
+                }
+
+                const plusButtons = document.querySelectorAll('.plus-button');
+                const popup = document.querySelector('.popup');
+                const substanceSelect = document.getElementById('substance');
+                const amountInput = document.getElementById('amount');
+
+                plusButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        popup.classList.add('active');
+                        const substance = button.parentNode.parentNode.classList[1]; // 获取圆圈的类名（物质名称）
+                        substanceSelect.value = substance; // 将物质名称设为下拉框的值
+                    });
+                });
+
+                document.getElementById('add-button').addEventListener('click', () => {
+                    const substance = substanceSelect.value;
+                    const amount = parseFloat(amountInput.value);
+                    const input = document.getElementById(`${substance}-amount`);
+                    const [currentAmount, totalAmountWithUnit] = input.value.split(' / ');
+                    const currentAmountFloat = parseFloat(currentAmount);
+                    if (isNaN(currentAmountFloat)) {
+                        input.value = `${Math.round(amount)} / ${totalAmountWithUnit}`;
+                    } else {
+                        const totalAmount = parseInt(totalAmountWithUnit.replace(/[^\d]/g, ''));
+                        const unit = totalAmountWithUnit.replace(/[\d]/g, '').trim();
+                        const newAmount = currentAmountFloat + amount;
+
+                        input.value = `${Math.round(newAmount)} / ${totalAmount} ${unit}`;
+                    }
+
+                    popup.classList.remove('active');
+                    amountInput.value = '';
                 });
             });
 
-            document.getElementById('add-button').addEventListener('click', () => {
-                const substance = substanceSelect.value;
-                const amount = parseInt(amountInput.value);
-                const circle = document.querySelector(`.circle.${substance}`);
-                const input = document.getElementById(`${substance}-amount`);
-                const [currentAmount, totalAmountWithUnit] = input.value.split(' / ');
-                const totalAmount = parseInt(totalAmountWithUnit.replace(/[^\d]/g, ''));
-                const unit = totalAmountWithUnit.replace(/[\d]/g, '').trim();
-                const newAmount = parseInt(currentAmount) + amount;
-
-                input.value = `${newAmount} / ${totalAmount} ${unit}`;
-
-                popup.classList.remove('active');
-                amountInput.value = '';
-            });
-        });
-    </script>
-    </body>
+            function back() {
+                window.location.href = "/plan";
+            }
+        </script>
+</body>
 
 </html>

@@ -41,7 +41,6 @@ def login():
                 sql = 'SELECT * FROM user WHERE User_ID = %s AND Password = %s'
                 cursor.execute(sql, (id, password))
                 user = cursor.fetchone()
-                conn.commit()
 
                 if user is None:
                     return render_template('fail.html')
@@ -53,7 +52,6 @@ def login():
             cursor.close()
     else:
         return render_template('homepage.html')
-
 
 # 獲取註冊視窗的資料
 @app.route('/register', methods=['POST'])
@@ -73,7 +71,7 @@ def register():
         try:
             conn = get_db_conn()
             with conn.cursor() as cursor:
-                sql = 'INSERT INTO user VALUES (%s, %s, %s, %s, %s, %s)'
+                sql = 'INSERT INTO user (User_ID, Password, Name, Height, Weight, Gender) VALUES (%s, %s, %s, %s, %s, %s)'
                 cursor.execute(
                     sql, (id, password, name, height, weight, gender))
                 conn.commit()
@@ -168,16 +166,17 @@ def menu():
 # 健身菜單頁面
 @app.route("/plan/workout", methods=["GET", "POST"])
 def workout():
+    # 確認是否有尚未完成的菜單，有則跳轉到菜單頁面
     try: 
         conn = get_db_conn()
         with conn.cursor(pymysql.cursors.DictCursor) as cursor:
-            sql=("SELECT * FROM exercise_plan WHERE Status = 'Undone'")
-            cursor.execute(sql)
+            sql=("SELECT * FROM exercise_plan WHERE Status = 'Undone' AND User_ID = %s")
+            cursor.execute(sql, (int(session['id'])))
             result = cursor.fetchall()
             if result:
                 sql = """
                 SELECT * FROM (
-                    SELECT ep.day, ep.Training_Detail, ep.Training_Area, ep.`Set`, eq.name as equipment, ep.Status, ep.Plan_ID
+                    SELECT ep.day, ep.Training_Detail, ep.Training_Area, ep.Weight, ep.`Set`, eq.name as equipment, ep.Status, ep.Plan_ID
                     FROM exercise_plan ep
                     JOIN equipment eq ON ep.Equipment_ID = eq.equipment_id
                     WHERE ep.day <= %s AND ep.User_ID = %s
@@ -194,6 +193,7 @@ def workout():
                     day = row['day']
                     exercise = row['equipment']
                     muscle_group = row['Training_Area']
+                    weight = row['Weight']
                     set_value = row['Set']
                     status = row['Status']
                     planid = row['Plan_ID']
@@ -203,6 +203,7 @@ def workout():
                         selected_plan[day].append({
                             "exercise": exercise,
                             "muscle_group": muscle_group,
+                            "weight": weight,
                             "set_value": set_value,
                             "status" : status,
                             "plan_id": planid
@@ -217,32 +218,77 @@ def workout():
     if request.method == "POST":
         days = int(request.form.get("days"))
         intensity = request.form.get("intensity")
+        area = request.form.get('training_area')
+        # 儲存健身菜單天數
         session['days'] = days
-        print(session['days'])
+
         set_value = 3
         if intensity == '中':
             set_value = 4
         elif intensity == '強':
             set_value = 5
 
-        conn = get_db_conn()
-        from exercise_data import exercises_by_day
+        # 獲得使用者的健身目標
         try:
-            with conn.cursor() as cursor:
+            conn = get_db_conn()
+            with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+                sql = 'SELECT Objective FROM user WHERE User_ID = %s'
+                cursor.execute(sql, (int(session['id'])))
+                result = cursor.fetchone()
+                obj = result['Objective']
+
+                # 根據所選部位和健身目標選擇菜單
+                if area == '胸肌':
+                    if obj == '增肌':
+                        from exercise_data import chest_muscle as exercises
+                    elif obj == '減脂':
+                        from exercise_data import chest_lose as exercises
+                elif area == '肩膀':
+                    from exercise_data import shoulder_muscle as exercises
+
                 for day in range(1, days + 1):
-                    for equipment_id, exercise, muscle_group in exercises_by_day[day][:4]:  # 確保每天只插入四個動作
+                    for equipment_id, exercise, muscle_group in exercises[day][:4]:  # 確保每天只插入四個動作
+                        # 為有氧動作設定單位
+                        if muscle_group == '有氧':
+                            if exercise == '跑步機' or exercise == '飛輪':
+                                unit = '15 分鐘'
+                            elif exercise == '棒式':
+                                unit = '10 分鐘'
+                            elif exercise == '跳繩':
+                                unit = '5 分鐘'
+                            else:
+                                unit = '3 分鐘'
+                        else:
+                            unit = '5 公斤'
+
+                        # 查詢過去是否有該器材已完成的健身紀錄
+                        # 若有則將單位設成紀錄中的最大值
+                        sql = """
+                        SELECT CAST(SUBSTRING_INDEX(Weight, ' ', 1) AS UNSIGNED) AS Weight FROM exercise_plan
+                        WHERE User_ID = %s AND Status = 'Done' AND Equipment_ID = %s
+                        ORDER BY Weight DESC
+                        LIMIT 1
+                        """
+                        cursor.execute(sql, (int(session['id']), equipment_id))
+                        results = cursor.fetchone()
+                        if results:
+                            equipment_weights = results['Weight']
+                            if muscle_group == '有氧':
+                                unit = str(equipment_weights) + ' 分鐘'
+                            else:
+                                unit = str(equipment_weights) + ' 公斤'
+
                         sql = """
                         INSERT INTO exercise_plan (User_ID, Equipment_ID, Object, Training_Area, Weight, `Set`, Training_Detail, day) 
                         VALUES (%s, %s, %s, %s, %s, %s, %s, %s) 
                         """
-                        cursor.execute(sql, (int(session['id']), equipment_id, '增肌', muscle_group, 5, set_value, exercise, day))
+                        cursor.execute(sql, (int(session['id']), equipment_id, obj, muscle_group, unit, set_value, exercise, day))
                 conn.commit()
-                
             return redirect(url_for("generate_plan"))
         except Exception as e:
             return str(e)
         finally:
-            conn.close()
+            cursor.close()
     else:
         return render_template("plan02-exercise.html")
 
@@ -255,7 +301,7 @@ def generate_plan():
         with conn.cursor(pymysql.cursors.DictCursor) as cursor:
             sql = """
             SELECT * FROM (
-                SELECT ep.day, ep.Training_Detail, ep.Training_Area, ep.`Set`, eq.name as equipment, ep.Status, ep.Plan_ID
+                SELECT ep.day, ep.Training_Detail, ep.Training_Area, ep.Weight, ep.`Set`, eq.name as equipment, ep.Status, ep.Plan_ID
                 FROM exercise_plan ep
                 JOIN equipment eq ON ep.Equipment_ID = eq.equipment_id
                 WHERE ep.day <= %s AND ep.User_ID = %s
@@ -272,6 +318,7 @@ def generate_plan():
                 day = row['day']
                 exercise = row['equipment']
                 muscle_group = row['Training_Area']
+                weight = row['Weight']
                 set_value = row['Set']
                 status = row['Status']
                 planid = row['Plan_ID']
@@ -281,6 +328,7 @@ def generate_plan():
                     selected_plan[day].append({
                         "exercise": exercise,
                         "muscle_group": muscle_group,
+                        "weight": weight,
                         "set_value": set_value,
                         "status" : status,
                         "plan_id": planid
@@ -296,6 +344,7 @@ def update_status():
     # 獲取前端傳遞的 Json 檔案 (該健身菜單的 id)
     data = request.json
     plan_id = data['plan_id']
+    today = date.today()
 
     try:
         conn = get_db_conn()
@@ -303,10 +352,10 @@ def update_status():
             # 將該 id 的菜單設置為完成
             sql = """
             UPDATE exercise_plan
-            SET Status = 'Done'
+            SET Status = 'Done', Completed_Date = %s
             WHERE Plan_ID = %s
             """
-            cursor.execute(sql, (int(plan_id)))
+            cursor.execute(sql, (today, int(plan_id)))
             conn.commit()
     except Exception as e:
         return str(e)
@@ -314,6 +363,31 @@ def update_status():
         conn.close()
 
     return jsonify({'success': True}), 200
+
+# 菜單編輯頁面
+@app.route('/update_plan', methods=['POST'])
+def update_plan():
+    data = request.json
+    plan_id = data['plan_id']
+    weight = data['weight']
+    set = data['set']
+
+    try:
+        conn = get_db_conn()
+        with conn.cursor() as cursor:
+            sql = """
+            UPDATE exercise_plan
+            SET Weight = %s, `Set` = %s
+            WHERE Plan_ID = %s
+            """
+            cursor.execute(sql, (weight, set, plan_id))
+            conn.commit()
+    except Exception as e:
+        return str(e)
+    finally:
+        conn.close()
+    
+    return jsonify({'success': True})
 
 # 飲食菜單頁面
 @app.route('/plan/nutrition', methods=['GET', 'POST'])
