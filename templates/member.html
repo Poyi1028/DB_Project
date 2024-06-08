@@ -4,11 +4,106 @@
 <head>
     <title>使用者資訊</title>
     <link rel="stylesheet" href="/static/css/member.css">
+    <style>
+        /* 覆盖层样式 */
+        #overlay {
+            display: none; /* 初始隐藏 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 500;
+        }
+
+        /* 弹出窗口样式 */
+        #popup {
+            display: none; /* 初始隐藏 */
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background: white;
+            border: 1px solid #ccc;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            max-width: 90%;
+            max-height: 90%;
+            overflow: auto;
+        }
+
+        /* 图片样式 */
+        #popup img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        /* 关闭按钮样式 */
+        #closePopupBtn {
+            display: block;
+            margin: 10px auto;
+            padding: 5px 10px;
+            background: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* 覆盖层样式 */
+        #overlay-calendar {
+            display: none; /* 初始隐藏 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 500;
+        }
+
+        /* 弹出窗口样式 */
+        #popup-calendar {
+            display: none; /* 初始隐藏 */
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background: white;
+            border: 1px solid #ccc;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            max-width: 90%;
+            max-height: 90%;
+            overflow: auto;
+        }
+
+        /* 图片样式 */
+        #popup-calendar img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        /* 关闭按钮样式 */
+        #closePopupCalendarBtn {
+            display: block;
+            margin: 10px auto;
+            padding: 5px 10px;
+            background: #f44336;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
-    <!-- <div class="main-container"> -->
-
     <div class="header">
         <div class="headline">M E M B E R</div>
     </div>
@@ -51,13 +146,28 @@
                     <input type="number" id="age" name="age" value="{{ age }}">
                 </div>
                 <div class="button-container">
-                    <button id="editBtn" type="submit">提交編輯</button>
+                    <button id="editBtn" type="submit" class="home-btn">提交編輯</button>
                     <button id="homeBtn" type="button" class="home-btn">返回首頁</button>
+                </div>
+                <div class="button-container">
+                    <a>查看報告</a><br>
+                    <button type="button" id="showCalendarPopupBtn" class="home-btn">健身日曆報告</button>
+                    <button type="button" id="showPopupBtn" class="home-btn">器材進步報告</button>
                 </div>
             </div>
         </form>
+        <div id="overlay"></div>
+        <div id="popup">
+            <button id="closePopupBtn">Close</button>
+            <img src="" id="plotImage" alt="Plot Image">
+        </div>
+        <div id="overlay-calendar"></div>
+        <div id="popup-calendar">
+            <button id="closePopupCalendarBtn">Close</button>
+            <img src="" id="calendarImage" alt="Calendar Plot Image">
+        </div>
+
     </div>
-    <!-- </div> -->
     <script>
         // 獲取後端傳遞的值
         const genderValue = '{{ gender }}';
@@ -90,6 +200,39 @@
             // 重定向到首頁
             window.location.href = '/home';
         });
+
+        document.getElementById('showPopupBtn').addEventListener('click', function() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('popup').style.display = 'block';
+            document.getElementById('plotImage').src = 'http://127.0.0.1:5000/member/report'; // 替换为你的Flask URL
+        });
+
+        document.getElementById('closePopupBtn').addEventListener('click', function() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('popup').style.display = 'none';
+        });
+
+        document.getElementById('overlay').addEventListener('click', function() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('popup').style.display = 'none';
+        });
+
+        document.getElementById('showCalendarPopupBtn').addEventListener('click', function() {
+            document.getElementById('overlay-calendar').style.display = 'block';
+            document.getElementById('popup-calendar').style.display = 'block';
+            document.getElementById('calendarImage').src = 'http://127.0.0.1:5000/member/calendar'; // 替换为你的Flask URL
+        });
+
+        document.getElementById('closePopupCalendarBtn').addEventListener('click', function() {
+            document.getElementById('overlay-calendar').style.display = 'none';
+            document.getElementById('popup-calendar').style.display = 'none';
+        });
+
+        document.getElementById('overlay-calendar').addEventListener('click', function() {
+            document.getElementById('overlay-calendar').style.display = 'none';
+            document.getElementById('popup-calendar').style.display = 'none';
+        });
+
     </script>
 
     <img src="/static/frog.png" alt="Description of image" class="bottom-center-image">
