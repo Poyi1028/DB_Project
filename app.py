@@ -73,6 +73,7 @@ def register():
         height = request.form['height']
         weight = request.form['weight']
         gender = request.form['gender']
+        age = request.form['age']
 
         if password != password2:
             return '密碼不一致'
@@ -80,8 +81,8 @@ def register():
         conn = get_db_conn()
         try:
             with conn.cursor() as cursor:
-                sql = 'INSERT INTO user (User_ID, Password, Name, Height, Weight, Gender) VALUES (%s, %s, %s, %s, %s, %s)'
-                cursor.execute(sql, (id, password, name, height, weight, gender))
+                sql = 'INSERT INTO user (User_ID, Password, Name, Height, Weight, Gender, Age) VALUES (%s, %s, %s, %s, %s, %s, %s)'
+                cursor.execute(sql, (id, password, name, height, weight, gender, age))
                 conn.commit()
                 return render_template('register.html')
         except Exception as e:

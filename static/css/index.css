@@ -94,8 +94,12 @@ button:hover {
 
 .form-row {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.form-row > div {
+    flex: 1;
+    min-width: 10px;
 }
 
 .form-row div {
@@ -104,7 +108,7 @@ button:hover {
 
 .form-row div select,
 .form-row div input {
-    width: 100%;
+    width: 90%;
     padding: 8px;
     margin-top: 5px;
     border: 1px solid #ccc;
